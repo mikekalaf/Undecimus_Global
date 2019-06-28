@@ -46,9 +46,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(darkModeSettings:) name:@"darkModeSettings" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(lightModeSettings:) name:@"lightModeSettings" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dismissKeyboardFromDoneButton:) name:@"dismissKeyboard" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(darkModeSettings:) name:NSLocalizedString(@"darkModeSettings", nil) object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(lightModeSettings:) name:NSLocalizedString(@"lightModeSettings", nil) object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dismissKeyboardFromDoneButton:) name:NSLocalizedString(@"dismissKeyboard", nil) object:nil];
     [self.bootNonceTextField setDelegate:self];
     [self.bootNonceTextField setAutocorrectionType:UITextAutocorrectionTypeNo];
     [self.kernelExploitTextField setDelegate:self];
@@ -219,22 +219,22 @@
     @try {
         [self.kernelExploitTextField setPlaceholder:[_exploitPickerArray objectAtIndex:(int)prefs->exploit]];
     } @catch (__unused NSException *exception) {
-        [self.kernelExploitTextField setPlaceholder:localize(@"Unavailable")];
+        [self.kernelExploitTextField setPlaceholder:localize(NSLocalizedString(@"Unavailable", nil))];
         [self.kernelExploitTextField setEnabled:NO];
     }
     [self.codeSubstitutorTextField setText:nil];
     @try {
         [self.codeSubstitutorTextField setPlaceholder:[_substitutorPickerArray objectAtIndex:(int)prefs->code_substitutor]];
     } @catch (__unused NSException *exception) {
-        [self.codeSubstitutorTextField setPlaceholder:localize(@"Unavailable")];
+        [self.codeSubstitutorTextField setPlaceholder:localize(NSLocalizedString(@"Unavailable", nil))];
         [self.codeSubstitutorTextField setEnabled:NO];
     }
     [self.openCydiaButton setEnabled:(BOOL)cydiaIsInstalled()];
-    [self.expiryLabel setPlaceholder:[NSString stringWithFormat:@"%d %@", (int)[[SettingsTableViewController provisioningProfileAtPath:[[NSBundle mainBundle] pathForResource:@"embedded" ofType:@"mobileprovision"]][@"ExpirationDate"] timeIntervalSinceDate:[NSDate date]] / 86400, localize(@"Days")]];
+    [self.expiryLabel setPlaceholder:[NSString stringWithFormat:@"%d %@", (int)[[SettingsTableViewController provisioningProfileAtPath:[[NSBundle mainBundle] pathForResource:NSLocalizedString(@"embedded", nil) ofType:NSLocalizedString(@"mobileprovision", nil)]][NSLocalizedString(@"ExpirationDate", nil)] timeIntervalSinceDate:[NSDate date]] / 86400, localize(NSLocalizedString(@"Days", nil))]];
     [self.overwriteBootNonceSwitch setOn:(BOOL)prefs->overwrite_boot_nonce];
     [self.exportKernelTaskPortSwitch setOn:(BOOL)prefs->export_kernel_task_port];
     [self.restoreRootFSSwitch setOn:(BOOL)prefs->restore_rootfs];
-    [self.uptimeLabel setPlaceholder:[NSString stringWithFormat:@"%d %@", (int)getUptime() / 86400, localize(@"Days")]];
+    [self.uptimeLabel setPlaceholder:[NSString stringWithFormat:@"%d %@", (int)getUptime() / 86400, localize(NSLocalizedString(@"Days", nil))]];
     [self.increaseMemoryLimitSwitch setOn:(BOOL)prefs->increase_memory_limit];
     [self.installSSHSwitch setOn:(BOOL)prefs->install_openssh];
     [self.installCydiaSwitch setOn:(BOOL)prefs->install_cydia];
@@ -256,7 +256,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
     if (indexPath.row == 0) {
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"showSpecialThanks" object:self];
+        [[NSNotificationCenter defaultCenter] postNotificationName:NSLocalizedString(@"showSpecialThanks", nil) object:self];
     }
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
@@ -264,7 +264,7 @@
 
 - (IBAction)selectedSpecialThanks:(id)sender {
     
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"showSpecialThanks" object:self];
+    [[NSNotificationCenter defaultCenter] postNotificationName:NSLocalizedString(@"showSpecialThanks", nil) object:self];
 }
 
 - (IBAction)tweakInjectionSwitchValueChanged:(id)sender {
@@ -300,7 +300,7 @@
         release_prefs(&prefs);
     } else {
         UIAlertController *const alertController = [UIAlertController alertControllerWithTitle:localize(@"Invalid Entry") message:localize(@"The boot nonce entered could not be parsed") preferredStyle:UIAlertControllerStyleAlert];
-        UIAlertAction *const OK = [UIAlertAction actionWithTitle:localize(@"OK") style:UIAlertActionStyleDefault handler:nil];
+        UIAlertAction *const OK = [UIAlertAction actionWithTitle:localize(NSLocalizedString(@"OK", nil)) style:UIAlertActionStyleDefault handler:nil];
         [alertController addAction:OK];
         [self presentViewController:alertController animated:YES completion:nil];
     }
@@ -449,12 +449,12 @@
 
 - (IBAction)tappedOnCopyNonce:(id)sender{
     UIAlertController *const copyBootNonceAlert = [UIAlertController alertControllerWithTitle:localize(@"Copy boot nonce?") message:localize(@"Would you like to copy nonce generator to clipboard?") preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction *const copyAction = [UIAlertAction actionWithTitle:localize(@"Yes") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+    UIAlertAction *const copyAction = [UIAlertAction actionWithTitle:localize(NSLocalizedString(@"Yes", nil)) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         prefs_t *prefs = copy_prefs();
         [[UIPasteboard generalPasteboard] setString:@(prefs->boot_nonce)];
         release_prefs(&prefs);
     }];
-    UIAlertAction *const noAction = [UIAlertAction actionWithTitle:localize(@"No") style:UIAlertActionStyleCancel handler:nil];
+    UIAlertAction *const noAction = [UIAlertAction actionWithTitle:localize(NSLocalizedString(@"No", nil)) style:UIAlertActionStyleCancel handler:nil];
     [copyBootNonceAlert addAction:copyAction];
     [copyBootNonceAlert addAction:noAction];
     [self presentViewController:copyBootNonceAlert animated:TRUE completion:nil];
@@ -462,12 +462,12 @@
 
 - (IBAction)tappedOnCopyECID:(id)sender {
     UIAlertController *const copyBootNonceAlert = [UIAlertController alertControllerWithTitle:localize(@"Copy ECID?") message:localize(@"Would you like to copy ECID to clipboard?") preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction *const copyAction = [UIAlertAction actionWithTitle:localize(@"Yes") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+    UIAlertAction *const copyAction = [UIAlertAction actionWithTitle:localize(NSLocalizedString(@"Yes", nil)) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         prefs_t *prefs = copy_prefs();
         [[UIPasteboard generalPasteboard] setString:hexFromInt(@(prefs->ecid).integerValue)];
         release_prefs(&prefs);
     }];
-    UIAlertAction *const noAction = [UIAlertAction actionWithTitle:localize(@"No") style:UIAlertActionStyleCancel handler:nil];
+    UIAlertAction *const noAction = [UIAlertAction actionWithTitle:localize(NSLocalizedString(@"No", nil)) style:UIAlertActionStyleCancel handler:nil];
     [copyBootNonceAlert addAction:copyAction];
     [copyBootNonceAlert addAction:noAction];
     [self presentViewController:copyBootNonceAlert animated:TRUE completion:nil];
@@ -520,7 +520,7 @@
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayFooterView:(UITableViewHeaderFooterView *)footerView forSection:(NSInteger)section {
-    footerView.textLabel.text = [@"unc0ver " stringByAppendingString:appVersion()];
+    footerView.textLabel.text = [NSLocalizedString(@"unc0ver ", nil) stringByAppendingString:appVersion()];
     footerView.textLabel.textAlignment = NSTextAlignmentCenter;
 }
 
@@ -636,98 +636,105 @@
 
 - (IBAction)tappedOnLoadTweaksInfoButton:(id)sender {
     showAlert(localize(@"Load Tweaks"),
-              localize(@"Description:"
+              localize(NSLocalizedString(@"Description:"
                        "\n\n"
                        "This option makes Substrate load extensions that are commonly referred to as tweaks in newly started processes."
                        "\n\n"
                        "Compatibility:"
                        "\n\n"
-                       "iOS 11.0-12.1.2 on arm64 SoCs (A7-A11)."),
+                       "iOS 11.0-12.1.2 on arm64 SoCs (A7-A11).", nil)
+                        ),
               false,
               false);
 }
 
 - (IBAction)tappedOnLoadDaemonsInfoButton:(id)sender {
     showAlert(localize(@"Load Daemons"),
-              localize(@"Description:"
+              localize(NSLocalizedString(@"Description:"
                        "\n\n"
                        "This option makes the jailbreak load the launch daemons located at /Library/LaunchDaemons and execute files located at /etc/rc.d."
                        "\n\n"
                        "Compatibility:"
                        "\n\n"
-                       "iOS 11.0-12.1.2 on arm64/arm64e SoCs (A7-A12X)."),
+                       "iOS 11.0-12.1.2 on arm64/arm64e SoCs (A7-A12X).", nil)
+                        ),
               false,
               false);
 }
 
 - (IBAction)tappedOnDumpAPTicketInfoButton:(id)sender {
     showAlert(localize(@"Dump APTicket"),
-              localize(@"Description:"
+              localize(NSLocalizedString(@"Description:"
                        "\n\n"
                        "This option makes the jailbreak create a copy of the system APTicket located at /System/Library/Caches/apticket.der at its Documents directory which is accessible via iTunes File Sharing."
                        "\n\n"
                        "Compatibility:"
                        "\n\n"
-                       "iOS 11.0-12.1.2 on arm64/arm64e SoCs (A7-A12X)."),
+                       "iOS 11.0-12.1.2 on arm64/arm64e SoCs (A7-A12X).", nil)
+                        ),
               false,
               false);
 }
 
 - (IBAction)tappedOnRefreshIconCacheInfoButton:(id)sender {
     showAlert(localize(@"Refresh Icon Cache"),
-              localize(@"Description:"
+              localize(NSLocalizedString(@"Description:"
                        "\n\n"
                        "This option makes the jailbreak regenerate SpringBoard's system application installation cache to cause newly installed .app bundles to appear on the icon list."
                        "\n\n"
                        "Compatibility:"
                        "\n\n"
-                       "iOS 11.0-12.1.2 on arm64/arm64e SoCs (A7-A12X)."),
+                       "iOS 11.0-12.1.2 on arm64/arm64e SoCs (A7-A12X).", nil)
+                       ),
               false,
               false);
 }
 
 - (IBAction)tappedOnDisableAutoUpdatesInfoButton:(id)sender {
     showAlert(localize(@"Disable Updates"),
-              localize(@"Description:"
+              localize(NSLocalizedString(@"Description:"
                        "\n\n"
                        "This option makes the jailbreak effectively disable the system's software update mechanism to prevent the system from automatically upgrading to the latest available firmware which may not be supported by the jailbreak at that time."
                        "\n\n"
                        "Compatibility:"
                        "\n\n"
-                       "iOS 11.0-12.1.2 on arm64/arm64e SoCs (A7-A12X)."),
+                       "iOS 11.0-12.1.2 on arm64/arm64e SoCs (A7-A12X).", nil)
+                       ),
               false,
               false);
 }
 
 - (IBAction)tappedOnDisableAppRevokesInfoButton:(id)sender {
     showAlert(localize(@"Disable Revokes"),
-              localize(@"Description:"
+              localize(NSLocalizedString(@"Description:"
                        "\n\n"
                        "This option makes the jailbreak effectively disable the system's online certificate status protocol system to prevent enterprise certificates which the jailbreak may be signed with from getting revoked."
                        "\n\n"
                        "Compatibility:"
                        "\n\n"
-                       "iOS 11.0-11.4.1 on arm64 SoCs (A7-A11)."),
+                       "iOS 11.0-11.4.1 on arm64 SoCs (A7-A11).", nil)
+                       ),
               false,
               false);
 }
 
 - (IBAction)tappedOnOverwriteBootNonceInfoButton:(id)sender {
     showAlert(localize(@"Set Boot Nonce"),
-              localize(@"Description:"
+              localize(NSLocalizedString(@"Description:"
                        "\n\n"
                        "This option makes the jailbreak set the persistent com.apple.System.boot-nonce variable in non-volatile random-access memory (NVRAM) which may be required to downgrade to an unsigned iOS firmware by using SHSH files."
                        "\n\n"
                        "Compatibility:"
                        "\n\n"
-                       "iOS 11.0-12.1.2 on arm64/arm64e SoCs (A7-A12X)."),
+                       "iOS 11.0-12.1.2 on arm64/arm64e SoCs (A7-A12X).", nil)
+                       ),
               false,
               false);
 }
 
 - (IBAction)tappedOnExportKernelTaskPortInfoButton:(id)sender {
     showAlert(localize(@"Export TFP0"),
-              localize(@"Description:"
+              localize(NSLocalizedString(@"Description:"
                        "\n\n"
                        "This option makes the jailbreak modify the host-port to grant any process access to the host-priv-port."
                        "\n"
@@ -737,14 +744,15 @@
                        "\n\n"
                        "Compatibility:"
                        "\n\n"
-                       "iOS 11.0-12.1.2 on arm64/arm64e SoCs (A7-A12X)."),
+                       "iOS 11.0-12.1.2 on arm64/arm64e SoCs (A7-A12X).", nil)
+                       ),
               false,
               false);
 }
 
 - (IBAction)tappedOnRestoreRootFSInfoButton:(id)sender {
     showAlert(localize(@"Restore RootFS"),
-              localize(@"Description:"
+              localize(NSLocalizedString(@"Description:"
                        "\n\n"
                        "This option makes the jailbreak restore the root filesystem (RootFS) to the snapshot which is created by the system when the device is restored."
                        "\n"
@@ -752,75 +760,81 @@
                        "\n\n"
                        "Compatibility:"
                        "\n\n"
-                       "iOS 11.0-12.1.2 on arm64/arm64e SoCs (A7-A12X)."),
+                       "iOS 11.0-12.1.2 on arm64/arm64e SoCs (A7-A12X).", nil)
+                        ),
               false,
               false);
 }
 
 - (IBAction)tappedOnIncreaseMemoryLimitInfoButton:(id)sender {
     showAlert(localize(@"Max Memory Limit"),
-              localize(@"Description:"
+              localize(NSLocalizedString(@"Description:"
                        "\n\n"
                        "This option makes the jailbreak modify the Jetsam configuration file to increase the memory limit that is enforced upon processes by Jetsam to the maximum value to effectively bypass that mechanism."
                        "\n\n"
                        "Compatibility:"
                        "\n\n"
-                       "iOS 11.0-12.1.2 on arm64 SoCs (A7-A11)."),
+                       "iOS 11.0-12.1.2 on arm64 SoCs (A7-A11).", nil)
+                        ),
               false,
               false);
 }
 
 - (IBAction)tappedOnInstallSSHInfoButton:(id)sender {
     showAlert(localize(@"(Re)Install OpenSSH"),
-              localize(@"Description:"
+              localize(NSLocalizedString(@"Description:"
                        "\n\n"
                        "This option makes the jailbreak (re)install the openssh package."
                        "\n\n"
                        "Compatibility:"
                        "\n\n"
-                       "iOS 11.0-12.1.2 on arm64 SoCs (A7-A11)."),
+                       "iOS 11.0-12.1.2 on arm64 SoCs (A7-A11).", nil)
+                       ),
               false,
               false);
 }
 
 - (IBAction)tappedOnInstallCydiaInfoButton:(id)sender {
     showAlert(localize(@"Reinstall Cydia"),
-              localize(@"Description:"
+              localize(NSLocalizedString(@"Description:"
                        "\n\n"
                        "This option makes jailbreak reinstall the cydiainstaller package."
                        "\n\n"
                        "Compatibility:"
                        "\n\n"
-                       "iOS 11.0-12.1.2 on arm64 SoCs (A7-A11)."),
+                       "iOS 11.0-12.1.2 on arm64 SoCs (A7-A11).", nil)
+                       ),
               false,
               false);
 }
 
 - (IBAction)tappedOnReloadSystemDaemonsInfoButton:(id)sender {
     showAlert(localize(@"Reload Daemons"),
-              localize(@"Description:"
+              localize(NSLocalizedString(@"Description:"
                        "\n\n"
                        "This option makes the jailbreak reload all of the running system daemons to make the Substrate extensions (tweaks) load in them."
                        "\n\n"
                        "Compatibility:"
                        "\n\n"
-                       "iOS 11.0-12.1.2 on arm64 SoCs (A7-A11)."),
+                       "iOS 11.0-12.1.2 on arm64 SoCs (A7-A11).", nil)
+                       ),
               false,
               false);
 }
 
 - (IBAction)tappedOnHideLogWindowInfoButton:(id)sender {
     showAlert(localize(@"Hide Log Window"),
-              localize(@"Description:"
+              localize(NSLocalizedString(@"Description:"
                        "\n\n"
-                       "This option hides the log window or console in the jailbreak app for a more clean look."),
+                       "This option hides the log window or console in the jailbreak app for a more clean look.", nil)
+                       ),
               false,
               false);
 }
 
 - (IBAction)tappedOnResetCydiaCacheInfoButton:(id)sender {
     showAlert(localize(@"Reset Cydia Cache"),
-              localize(@"Description:"
+              localize(NSLocalizedString(@"Description:"
                        "\n\n"
                        "This option makes the jailbreak reset Cydia's cache."
                        "\n"
@@ -828,14 +842,15 @@
                        "\n\n"
                        "Compatibility:"
                        "\n\n"
-                       "iOS 11.0-12.1.2 on arm64 SoCs (A7-A11)."),
+                       "iOS 11.0-12.1.2 on arm64 SoCs (A7-A11).", nil)
+                       ),
               false,
               false);
 }
 
 - (IBAction)tappedOnSSHOnlyInfoButton:(id)sender {
     showAlert(localize(@"SSH Only"),
-              localize(@"Description:"
+              localize(NSLocalizedString(@"Description:"
                        "\n\n"
                        "This option makes the jailbreak skip installing Cydia and Substrate."
                        "\n"
@@ -843,14 +858,15 @@
                        "\n\n"
                        "Compatibility:"
                        "\n\n"
-                       "iOS 11.0-12.1.2 on arm64/arm64e SoCs (A7-A12X)."),
+                       "iOS 11.0-12.1.2 on arm64/arm64e SoCs (A7-A12X).", nil)
+                       ),
               false,
               false);
 }
 
 - (IBAction)tappedOnEnableGetTaskAllowInfoButton:(id)sender {
     showAlert(localize(@"Set get-task-allow"),
-              localize(@"Description:"
+              localize(NSLocalizedString(@"Description:"
                        "\n\n"
                        "This option makes the jailbreak dynamically enable the get-task-allow entitlement for every new process."
                        "\n"
@@ -860,13 +876,14 @@
                        "\n\n"
                        "Compatibility:"
                        "\n\n"
-                       "iOS 11.0-12.1.2 on arm64 SoCs (A7-A11)."),
+                       "iOS 11.0-12.1.2 on arm64 SoCs (A7-A11).", nil)
+                       ),
               false,
               false);
 }
 - (IBAction)tappedOnCSDebuggedInfoButton:(id)sender {
     showAlert(localize(@"Set CS_DEBUGGED"),
-              localize(@"Description:"
+              localize(NSLocalizedString(@"Description:"
                        "\n\n"
                        "This option makes the jailbreak dynamically set the CS_DEBUGGED codesign flag for every new process."
                        "\n"
@@ -874,19 +891,21 @@
                        "\n\n"
                        "Compatibility:"
                        "\n\n"
-                       "iOS 11.0-12.1.2 on arm64 SoCs (A7-A11)."),
+                       "iOS 11.0-12.1.2 on arm64 SoCs (A7-A11).", nil)
+                       ),
               false,
               false);
 }
 - (IBAction)tappedOnAutoRespringInfoButton:(id)sender {
     showAlert(localize(@"Auto Respring"),
-              localize(@"Description:"
+              localize(NSLocalizedString(@"Description:"
                        "\n\n"
                        "This option makes the jailbreak automatically restart the SpringBoard as soon as the jailbreak process is completed without the confirmation."
                        "\n\n"
                        "Compatibility:"
                        "\n\n"
-                       "iOS 11.0-12.1.2 on arm64 SoCs (A7-A11)."),
+                       "iOS 11.0-12.1.2 on arm64 SoCs (A7-A11).", nil)
+                       ),
               false,
               false);
 }

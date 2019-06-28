@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 48;
+	objectVersion = 50;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -68,7 +68,8 @@
 		51435081229E2F0C00446FBA /* Settings-Light.png in Resources */ = {isa = PBXBuildFile; fileRef = 51435080229E2F0C00446FBA /* Settings-Light.png */; };
 		51F1DB24229ED54400B81A6F /* DarkMode-Dark.png in Resources */ = {isa = PBXBuildFile; fileRef = 51F1DB22229ED54300B81A6F /* DarkMode-Dark.png */; };
 		51F1DB25229ED54400B81A6F /* Settings-Dark.png in Resources */ = {isa = PBXBuildFile; fileRef = 51F1DB23229ED54400B81A6F /* Settings-Dark.png */; };
-		8D592A68218E47F60035D2BC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8D592A67218E47F60035D2BC /* Main.storyboard */; };
+		E5D08D3122C64AAE00BA2989 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E5D08D3322C64AAE00BA2989 /* Localizable.strings */; };
+		E5E1542622C64EE900EE4C4A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E5E1542822C64EEA00EE4C4A /* Main.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -203,7 +204,10 @@
 		51F1DB28229F31C400B81A6F /* DarkMode-Light.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "DarkMode-Light.png"; sourceTree = "<group>"; };
 		51F1DB29229F31D300B81A6F /* DarkMode-Light.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "DarkMode-Light.png"; path = "../../../../DarkMode-Light.png"; sourceTree = "<group>"; };
 		51F1DB2A229F325700B81A6F /* multi_path.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = multi_path.entitlements; sourceTree = "<group>"; };
-		8D592A67218E47F60035D2BC /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		E5D08D3222C64AAE00BA2989 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		E5E1542722C64EEA00EE4C4A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		E5F63FD122C67B7700853356 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
+		E5F63FD222C680B200853356 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -486,11 +490,12 @@
 		21C0FC6921369EB700849420 /* Undecimus */ = {
 			isa = PBXGroup;
 			children = (
+				E5D08D3322C64AAE00BA2989 /* Localizable.strings */,
 				2170BDCC21B330210059BD10 /* frameworks */,
 				2170BDCB21B32FF10059BD10 /* source */,
 				2170BD3621B192B90059BD10 /* resources */,
 				2170BD3421B192750059BD10 /* include */,
-				8D592A67218E47F60035D2BC /* Main.storyboard */,
+				E5E1542822C64EEA00EE4C4A /* Main.storyboard */,
 				51F1DB2A229F325700B81A6F /* multi_path.entitlements */,
 				21C0FC7321369EB800849420 /* Assets.xcassets */,
 				21C0FC7521369EB800849420 /* LaunchScreen.storyboard */,
@@ -575,22 +580,22 @@
 		21C0FC5F21369EB700849420 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 1010;
+				LastUpgradeCheck = 1020;
 				ORGANIZATIONNAME = Pwn20wnd;
 				TargetAttributes = {
 					21C0FC6621369EB700849420 = {
 						CreatedOnToolsVersion = 9.4.1;
-						ProvisioningStyle = Manual;
 					};
 				};
 			};
 			buildConfigurationList = 21C0FC6221369EB700849420 /* Build configuration list for PBXProject "Undecimus" */;
-			compatibilityVersion = "Xcode 8.0";
+			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 				Base,
+				"zh-Hans",
 			);
 			mainGroup = 21C0FC5E21369EB700849420;
 			productRefGroup = 21C0FC6821369EB700849420 /* Products */;
@@ -610,8 +615,9 @@
 				51F1DB25229ED54400B81A6F /* Settings-Dark.png in Resources */,
 				51435081229E2F0C00446FBA /* Settings-Light.png in Resources */,
 				21C0FC7721369EB800849420 /* LaunchScreen.storyboard in Resources */,
+				E5D08D3122C64AAE00BA2989 /* Localizable.strings in Resources */,
 				51F1DB24229ED54400B81A6F /* DarkMode-Dark.png in Resources */,
-				8D592A68218E47F60035D2BC /* Main.storyboard in Resources */,
+				E5E1542622C64EE900EE4C4A /* Main.storyboard in Resources */,
 				21C0FC7421369EB800849420 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -702,6 +708,24 @@
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
+		E5D08D3322C64AAE00BA2989 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E5D08D3222C64AAE00BA2989 /* en */,
+				E5F63FD222C680B200853356 /* zh-Hans */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		E5E1542822C64EEA00EE4C4A /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E5E1542722C64EEA00EE4C4A /* Base */,
+				E5F63FD122C67B7700853356 /* zh-Hans */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
@@ -709,6 +733,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -767,6 +792,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -825,10 +851,9 @@
 				);
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_ENTITLEMENTS = "$(SRCROOT)/Undecimus/multi_path.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = "";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = V37B28NBL5;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -846,7 +871,10 @@
 				);
 				INFOPLIST_FILE = Undecimus/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Undecimus",
@@ -860,7 +888,7 @@
 					IOKit,
 					"-w",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = science.xnu.undecimus;
+				PRODUCT_BUNDLE_IDENTIFIER = science.xapenny.undecimus;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -878,10 +906,9 @@
 				);
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_ENTITLEMENTS = "$(SRCROOT)/Undecimus/multi_path.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = "";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = V37B28NBL5;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -899,7 +926,10 @@
 				);
 				INFOPLIST_FILE = Undecimus/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Undecimus",
@@ -912,7 +942,7 @@
 					IOKit,
 					"-w",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = science.xnu.undecimus;
+				PRODUCT_BUNDLE_IDENTIFIER = science.xapenny.undecimus;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";

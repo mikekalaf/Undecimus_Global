@@ -102,7 +102,7 @@ extern int maxStage;
 
 void jailbreak()
 {
-    status(localize(@"Jailbreaking"), false, false);
+    status(localize(NSLocalizedString(@"Jailbreaking", nil)), false, false);
     
     int rv = 0;
     bool usedPersistedKernelTaskPort = NO;
@@ -130,7 +130,7 @@ void jailbreak()
     NSFileManager *const fileManager = [NSFileManager defaultManager];
     bool const doInject = (kCFCoreFoundationVersionNumber >= kCFCoreFoundationVersionNumber_iOS_12_0);
     const char *success_file = [temporaryDirectory stringByAppendingPathComponent:@"jailbreak.completed"].UTF8String;
-    NSString *const NSJailbreakDirectory = @"/jb";
+    NSString *const NSJailbreakDirectory = NSLocalizedString(@"/jb", nil);
     const char *jailbreakDirectory = NSJailbreakDirectory.UTF8String;
     struct passwd *const root_pw = getpwnam("root");
     struct passwd *const mobile_pw = getpwnam("mobile");
@@ -227,7 +227,7 @@ void jailbreak()
                 }
                 default: {
                     notice(localize(@"No exploit selected."), false, false);
-                    status(localize(@"Jailbreak"), true, true);
+                    status(localize(NSLocalizedString(@"Jailbreak", nil)), true, true);
                     return;
                     break;
                 }
@@ -558,8 +558,8 @@ void jailbreak()
                 ensure_symlink("/dev/null", [path UTF8String]);
             }
             _assert(modifyPlist(@"/var/mobile/Library/Preferences/com.apple.Preferences.plist", ^(id plist) {
-                plist[@"kBadgedForSoftwareUpdateKey"] = @NO;
-                plist[@"kBadgedForSoftwareUpdateJumpOnceKey"] = @NO;
+                plist[NSLocalizedString(@"kBadgedForSoftwareUpdateKey", nil)] = @NO;
+                plist[NSLocalizedString(@"kBadgedForSoftwareUpdateJumpOnceKey", nil)] = @NO;
             }), localize(@"Unable to disable software update badge."), true);
             LOG("Successfully disabled Auto Updates.");
             insertstatus(localize(@"Disabled Auto Updates.\n"));
@@ -571,8 +571,8 @@ void jailbreak()
                 ensure_directory([path UTF8String], root_pw->pw_uid, 0755);
             }
             _assert(modifyPlist(@"/var/mobile/Library/Preferences/com.apple.Preferences.plist", ^(id plist) {
-                plist[@"kBadgedForSoftwareUpdateKey"] = @YES;
-                plist[@"kBadgedForSoftwareUpdateJumpOnceKey"] = @YES;;
+                plist[NSLocalizedString(@"kBadgedForSoftwareUpdateKey", nil)] = @YES;
+                plist[NSLocalizedString(@"kBadgedForSoftwareUpdateJumpOnceKey", nil)] = @YES;;
             }), localize(@"Unable to enable software update badge."), true);
             insertstatus(localize(@"Enabled Auto Updates.\n"));
         }
@@ -659,7 +659,7 @@ void jailbreak()
             _assert(snapshotSystemVersion != nil, localize(@"Unable to get SystemVersion.plist for RootFS."), true);
             NSDictionary *const rootfsSystemVersion = [NSDictionary dictionaryWithContentsOfFile:rootSystemVersionPlist];
             _assert(rootfsSystemVersion != nil, localize(@"Unable to get SystemVersion.plist for newly mounted RootFS."), true);
-            if (![rootfsSystemVersion[@"ProductBuildVersion"] isEqualToString:snapshotSystemVersion[@"ProductBuildVersion"]]) {
+            if (![rootfsSystemVersion[NSLocalizedString(@"ProductBuildVersion", nil)] isEqualToString:snapshotSystemVersion[NSLocalizedString(@"ProductBuildVersion", nil)]]) {
                 LOG("snapshot VersionPlist: %@", snapshotSystemVersion);
                 LOG("rootfs VersionPlist: %@", rootfsSystemVersion);
                 _assert("BuildVersions match"==NULL, invalidRootMessage, true);
@@ -897,8 +897,8 @@ void jailbreak()
             _assert(fs_snapshot_mount(rootfd, systemSnapshotMountPoint, snapshot, 0) == ERR_SUCCESS, localize(@"Unable to mount original snapshot."), true);
             const char *systemSnapshotLaunchdPath = [@(systemSnapshotMountPoint) stringByAppendingPathComponent:@"sbin/launchd"].UTF8String;
             _assert(waitForFile(systemSnapshotLaunchdPath) == ERR_SUCCESS, localize(@"Unable to verify mounted snapshot."), true);
-            _assert(extractDebsForPkg(@"rsync", nil, false, true), localize(@"Unable to extract rsync."), true);
-            _assert(extractDebsForPkg(@"uikittools", nil, false, true), localize(@"Unable to extract uikittools."), true);
+            _assert(extractDebsForPkg(NSLocalizedString(@"rsync", nil), nil, false, true), localize(@"Unable to extract rsync."), true);
+            _assert(extractDebsForPkg(NSLocalizedString(@"uikittools", nil), nil, false, true), localize(@"Unable to extract uikittools."), true);
             inject_trust_cache();
             if (kCFCoreFoundationVersionNumber < kCFCoreFoundationVersionNumber_iOS_11_3) {
                 _assert(runCommand("/usr/bin/rsync", "-vaxcH", "--progress", "--delete-after", "--exclude=/Developer", "--exclude=/usr/bin/uicache", "--exclude=/usr/bin/find", [@(systemSnapshotMountPoint) stringByAppendingPathComponent:@"."].UTF8String, "/", NULL) == 0, localize(@"Unable to sync /."), true);
@@ -932,7 +932,7 @@ void jailbreak()
             
             LOG("Disallowing SpringBoard to show non-default system apps...");
             _assert(modifyPlist(@"/var/mobile/Library/Preferences/com.apple.springboard.plist", ^(id plist) {
-                plist[@"SBShowNonDefaultSystemApps"] = @NO;
+                plist[NSLocalizedString(@"SBShowNonDefaultSystemApps", nil)] = @NO;
             }), localize(@"Unable to update SpringBoard preferences."), true);
             LOG("Successfully disallowed SpringBoard to show non-default system apps.");
             
@@ -962,7 +962,7 @@ void jailbreak()
         
         progress(localize(@"Allowing SpringBoard to show non-default system apps..."));
         _assert(modifyPlist(@"/var/mobile/Library/Preferences/com.apple.springboard.plist", ^(id plist) {
-            plist[@"SBShowNonDefaultSystemApps"] = @YES;
+            plist[NSLocalizedString(@"SBShowNonDefaultSystemApps", nil)] = @YES;
         }), localize(@"Unable to update SpringBoard preferences."), true);
         LOG("Successfully allowed SpringBoard to show non-default system apps.");
         insertstatus(localize(@"Allowed SpringBoard to show non-default system apps.\n"));
@@ -996,11 +996,11 @@ void jailbreak()
                 }
             }
         }
-        for (id file in [fileManager contentsOfDirectoryAtPath:@"/Applications" error:nil]) {
-            NSString *const path = [@"/Applications" stringByAppendingPathComponent:file];
+        for (id file in [fileManager contentsOfDirectoryAtPath:NSLocalizedString(@"/Applications", nil) error:nil]) {
+            NSString *const path = [NSLocalizedString(@"/Applications", nil) stringByAppendingPathComponent:file];
             NSMutableDictionary *const info_plist = [NSMutableDictionary dictionaryWithContentsOfFile:[path stringByAppendingPathComponent:@"Info.plist"]];
             if (info_plist == nil) continue;
-            if ([info_plist[@"CFBundleIdentifier"] hasPrefix:@"com.apple."]) continue;
+            if ([info_plist[NSLocalizedString(@"CFBundleIdentifier", nil)] hasPrefix:@"com.apple."]) continue;
             directoryEnumerator = [fileManager enumeratorAtURL:[NSURL URLWithString:path] includingPropertiesForKeys:@[NSURLIsDirectoryKey] options:0 errorHandler:nil];
             if (directoryEnumerator == nil) continue;
             for (id URL in directoryEnumerator) {
@@ -1031,18 +1031,18 @@ void jailbreak()
         if (access(jailbreak_file("Library/LaunchDaemons/dropbear.plist"), F_OK) != ERR_SUCCESS) {
             NSMutableDictionary *dropbear_plist = [NSMutableDictionary new];
             _assert(dropbear_plist, localize(@"Unable to allocate memory for dropbear plist."), true);
-            dropbear_plist[@"Program"] = NSJailbreakFile(@"usr/local/bin/dropbear");
-            dropbear_plist[@"RunAtLoad"] = @YES;
-            dropbear_plist[@"Label"] = @"ShaiHulud";
-            dropbear_plist[@"KeepAlive"] = @YES;
-            dropbear_plist[@"ProgramArguments"] = [NSMutableArray new];
-            dropbear_plist[@"ProgramArguments"][0] = @"/usr/local/bin/dropbear";
-            dropbear_plist[@"ProgramArguments"][1] = @"-F";
-            dropbear_plist[@"ProgramArguments"][2] = @"-R";
-            dropbear_plist[@"ProgramArguments"][3] = @"--shell";
-            dropbear_plist[@"ProgramArguments"][4] = NSJailbreakFile(@"bin/bash");
-            dropbear_plist[@"ProgramArguments"][5] = @"-p";
-            dropbear_plist[@"ProgramArguments"][6] = @"22";
+            dropbear_plist[NSLocalizedString(@"Program", nil)] = NSJailbreakFile(@"usr/local/bin/dropbear");
+            dropbear_plist[NSLocalizedString(@"RunAtLoad", nil)] = @YES;
+            dropbear_plist[NSLocalizedString(@"Label", nil)] = NSLocalizedString(@"ShaiHulud", nil);
+            dropbear_plist[NSLocalizedString(@"KeepAlive", nil)] = @YES;
+            dropbear_plist[NSLocalizedString(@"ProgramArguments", nil)] = [NSMutableArray new];
+            dropbear_plist[NSLocalizedString(@"ProgramArguments", nil)][0] = @"/usr/local/bin/dropbear";
+            dropbear_plist[NSLocalizedString(@"ProgramArguments", nil)][1] = NSLocalizedString(@"-F", nil);
+            dropbear_plist[NSLocalizedString(@"ProgramArguments", nil)][2] = NSLocalizedString(@"-R", nil);
+            dropbear_plist[NSLocalizedString(@"ProgramArguments", nil)][3] = @"--shell";
+            dropbear_plist[NSLocalizedString(@"ProgramArguments", nil)][4] = NSJailbreakFile(@"bin/bash");
+            dropbear_plist[NSLocalizedString(@"ProgramArguments", nil)][5] = NSLocalizedString(@"-p", nil);
+            dropbear_plist[NSLocalizedString(@"ProgramArguments", nil)][6] = NSLocalizedString(@"22", nil);
             _assert([dropbear_plist writeToFile:NSJailbreakFile(@"Library/LaunchDaemons/dropbear.plist") atomically:YES], localize(@"Unable to create dropbear launch daemon."), true);
             _assert(init_file(jailbreak_file("Library/LaunchDaemons/dropbear.plist"), root_pw->pw_uid, 0644), localize(@"Unable to initialize dropbear launch daemon."), true);
         }
@@ -1119,7 +1119,7 @@ void jailbreak()
         LOG("Resource Pkgs: \"%@\".", resourcesPkgs);
         for (id pkg in resourcesPkgs) {
             // Ignore substitutor because we just handled that separately.
-            if ([pkg isEqualToString:@(substitutor->package_id)] || [pkg isEqualToString:@"firmware"])
+            if ([pkg isEqualToString:@(substitutor->package_id)] || [pkg isEqualToString:NSLocalizedString(@"firmware", nil)])
                 continue;
             if (verifySums([NSString stringWithFormat:@"/var/lib/dpkg/info/%@.md5sums", pkg], HASHTYPE_MD5)) {
                 LOG("Pkg \"%@\" verified.", pkg);
@@ -1211,7 +1211,7 @@ void jailbreak()
         if ([file containsString:@"/sbin/fstyp"] || [file containsString:@"\n\n"]) {
             // This is not a stock file for iOS11+
             file = [file stringByReplacingOccurrencesOfString:@"/sbin/fstyp\n" withString:@""];
-            file = [file stringByReplacingOccurrencesOfString:@"\n\n" withString:@"\n"];
+            file = [file stringByReplacingOccurrencesOfString:@"\n\n" withString:NSLocalizedString(@"\n", nil)];
             [file writeToFile:@"/var/lib/dpkg/info/firmware-sbin.list" atomically:YES encoding:NSUTF8StringEncoding error:nil];
         }
         
@@ -1248,7 +1248,7 @@ void jailbreak()
             _assert(clean_file(substitutor->bootstrap_tools), localize(@"Unable to clean old %s bootstrap tools directory.", substitutor->name), true);
             _assert([fileManager moveItemAtPath:@"/Library/substrate" toPath:@(substitutor->bootstrap_tools) error:nil], localize(@"Unable to move %s bootstrap tools directory.", substitutor->name), true);
         }
-        _assert(runCommand(substitutor->startup_executable, NULL) == ERR_SUCCESS, localize(@"Unable to %@ %s.", skipSubstitutor ? @"restart" : @"start", substitutor->name), skipSubstitutor?false:true);
+        _assert(runCommand(substitutor->startup_executable, NULL) == ERR_SUCCESS, localize(@"Unable to %@ %s.", skipSubstitutor ? NSLocalizedString(@"restart", nil) : NSLocalizedString(@"start", nil), substitutor->name), skipSubstitutor?false:true);
         LOG("Successfully started %s.", substitutor->name);
         
         insertstatus(localize(@"Loaded %s.\n", substitutor->name));
@@ -1262,7 +1262,7 @@ void jailbreak()
         
         if (!pkgIsConfigured("xz")) {
             removePkg("lzma", true);
-            extractDebsForPkg(@"lzma", debsToInstall, false, doInject);
+            extractDebsForPkg(NSLocalizedString(@"lzma", nil), debsToInstall, false, doInject);
             inject_trust_cache();
         }
         
@@ -1273,9 +1273,9 @@ void jailbreak()
         // Test dpkg
         if (!pkgIsConfigured("dpkg")) {
             LOG("Extracting dpkg...");
-            _assert(extractDebsForPkg(@"dpkg", debsToInstall, false, doInject), localize(@"Unable to extract dpkg."), true);
+            _assert(extractDebsForPkg(NSLocalizedString(@"dpkg", nil), debsToInstall, false, doInject), localize(@"Unable to extract dpkg."), true);
             inject_trust_cache();
-            NSString *const dpkg_deb = debForPkg(@"dpkg");
+            NSString *const dpkg_deb = debForPkg(NSLocalizedString(@"dpkg", nil));
             _assert(installDeb(dpkg_deb.UTF8String, true), localize(@"Unable to install deb for dpkg."), true);
             [debsToInstall removeObject:dpkg_deb];
         }
@@ -1283,7 +1283,7 @@ void jailbreak()
         if (needStrap || !pkgIsConfigured("firmware")) {
             if (access("/usr/libexec/cydia/firmware.sh", F_OK) != ERR_SUCCESS || !pkgIsConfigured("cydia")) {
                 LOG("Extracting Cydia...");
-                NSArray <NSString *> *const fwDebs = debsForPkgs(@[@"cydia", @"cydia-lproj", @"darwintools", @"uikittools", @"system-cmds"]);
+                NSArray <NSString *> *const fwDebs = debsForPkgs(@[NSLocalizedString(@"cydia", nil), @"cydia-lproj", NSLocalizedString(@"darwintools", nil), NSLocalizedString(@"uikittools", nil), @"system-cmds"]);
                 _assert(fwDebs != nil, localize(@"Unable to get firmware debs."), true);
                 _assert(installDebs(fwDebs, true, false), localize(@"Unable to install firmware debs."), true);
             }
@@ -1308,7 +1308,7 @@ void jailbreak()
             (pkgIsInstalled("apt7-key") && compareInstalledVersion("apt7-key", "lt", "1:0"))
             ) {
             LOG("Installing newer version of apt7");
-            NSArray <NSString *> *const apt7debs = debsForPkgs(@[@"apt7", @"apt7-key", @"apt7-lib"]);
+            NSArray <NSString *> *const apt7debs = debsForPkgs(@[NSLocalizedString(@"apt7", nil), @"apt7-key", @"apt7-lib"]);
             _assert(apt7debs != nil && apt7debs.count == 3, localize(@"Unable to get debs for apt7."), true);
             for (id deb in apt7debs) {
                 if (![debsToInstall containsObject:deb]) {
@@ -1340,7 +1340,7 @@ void jailbreak()
             [prefsContents writeToFile:@(prefsPath) atomically:NO encoding:NSUTF8StringEncoding error:nil];
         }
         init_file(prefsPath, root_pw->pw_uid, 0644);
-        NSString *const repoPath = pathForResource(@"apt");
+        NSString *const repoPath = pathForResource(NSLocalizedString(@"apt", nil));
         _assert(repoPath != nil, localize(@"Unable to get repo path."), true);
         ensure_directory("/var/lib/undecimus", root_pw->pw_uid, 0755);
         ensure_symlink([repoPath UTF8String], "/var/lib/undecimus/apt");
@@ -1356,7 +1356,7 @@ void jailbreak()
         // Workaround for what appears to be an apt bug
         ensure_symlink("/var/lib/undecimus/apt/./Packages", "/var/lib/apt/lists/_var_lib_undecimus_apt_._Packages");
         
-        if (!aptInstall(@[@"-f"])) {
+        if (!aptInstall(@[NSLocalizedString(@"-f", nil)])) {
             _assert(aptRepair(), localize(@"Unable to repair system."), true);
         }
         
@@ -1452,7 +1452,7 @@ void jailbreak()
             
             progress(localize(@"Increasing memory limit..."));
             _assert(modifyPlist(jetsamFile, ^(id plist) {
-                plist[@"Version4"][@"System"][@"Override"][@"Global"][@"UserHighWaterMark"] = [NSNumber numberWithInteger:[plist[@"Version4"][@"PListDevice"][@"MemoryCapacity"] integerValue]];
+                plist[NSLocalizedString(@"Version4", nil)][NSLocalizedString(@"System", nil)][NSLocalizedString(@"Override", nil)][NSLocalizedString(@"Global", nil)][NSLocalizedString(@"UserHighWaterMark", nil)] = [NSNumber numberWithInteger:[plist[NSLocalizedString(@"Version4", nil)][NSLocalizedString(@"PListDevice", nil)][NSLocalizedString(@"MemoryCapacity", nil)] integerValue]];
             }), localize(@"Unable to update Jetsam plist to increase memory limit."), true);
             LOG("Successfully increased memory limit.");
             insertstatus(localize(@"Increased Memory Limit.\n"));
@@ -1461,7 +1461,7 @@ void jailbreak()
             
             progress(localize(@"Restoring memory limit..."));
             _assert(modifyPlist(jetsamFile, ^(id plist) {
-                plist[@"Version4"][@"System"][@"Override"][@"Global"][@"UserHighWaterMark"] = nil;
+                plist[NSLocalizedString(@"Version4", nil)][NSLocalizedString(@"System", nil)][NSLocalizedString(@"Override", nil)][NSLocalizedString(@"Global", nil)][NSLocalizedString(@"UserHighWaterMark", nil)] = nil;
             }), localize(@"Unable to update Jetsam plist to restore memory limit."), true);
             LOG("Successfully restored memory limit.");
             insertstatus(localize(@"Restored Memory Limit.\n"));
@@ -1474,7 +1474,7 @@ void jailbreak()
         if (prefs->install_openssh) {
             // Install OpenSSH.
             progress(localize(@"Installing OpenSSH..."));
-            _assert(aptInstall(@[@"openssh"]), localize(@"Unable to install OpenSSH."), true);
+            _assert(aptInstall(@[NSLocalizedString(@"openssh", nil)]), localize(@"Unable to install OpenSSH."), true);
             prefs->install_openssh = false;
             sync_prefs();
             LOG("Successfully installed OpenSSH.");
@@ -1519,9 +1519,9 @@ void jailbreak()
             // Install Cydia.
             
             progress(localize(@"Installing Cydia..."));
-            NSString *const cydiaVer = versionOfPkg(@"cydia");
+            NSString *const cydiaVer = versionOfPkg(NSLocalizedString(@"cydia", nil));
             _assert(cydiaVer != nil, localize(@"Unable to get Cydia version."), true);
-            _assert(aptInstall(@[@"--reinstall", [@"cydia" stringByAppendingFormat:@"=%@", cydiaVer]]), localize(@"Unable to reinstall Cydia."), true);
+            _assert(aptInstall(@[@"--reinstall", [NSLocalizedString(@"cydia", nil) stringByAppendingFormat:@"=%@", cydiaVer]]), localize(@"Unable to reinstall Cydia."), true);
             prefs->install_cydia = false;
             prefs->run_uicache = true;
             sync_prefs();
@@ -1661,7 +1661,7 @@ out:;
     myOriginalHost = HOST_NULL;
     insertstatus(([NSString stringWithFormat:@"\nRead %zu bytes from kernel memory\nWrote %zu bytes to kernel memory\n", kreads, kwrites]));
     insertstatus(([NSString stringWithFormat:@"\nJailbroke in %ld seconds\n", time(NULL) - start_time]));
-    status(localize(@"Jailbroken"), false, false);
+    status(localize(NSLocalizedString(@"Jailbroken", nil)), false, false);
     bool forceRespring = (prefs->exploit == mach_swap_exploit);
     forceRespring |= (prefs->exploit == mach_swap_2_exploit);
     forceRespring &= (!usedPersistedKernelTaskPort);

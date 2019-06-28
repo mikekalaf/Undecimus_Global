@@ -76,12 +76,12 @@ NSDictionary *parseDependsOrProvides(NSString *string) {
     NSTextCheckingResult *verMatch = [version firstMatchInString:string options:0 range:NSMakeRange(0, string.length)];
     if (verMatch) {
         return @{
-                 @"name": [string substringWithRange:[verMatch rangeAtIndex:1]],
-                 @"op": [string substringWithRange:[verMatch rangeAtIndex:2]],
-                 @"ver": [string substringWithRange:[verMatch rangeAtIndex:3]]
+                 NSLocalizedString(@"name", nil): [string substringWithRange:[verMatch rangeAtIndex:1]],
+                 NSLocalizedString(@"op", nil): [string substringWithRange:[verMatch rangeAtIndex:2]],
+                 NSLocalizedString(@"ver", nil): [string substringWithRange:[verMatch rangeAtIndex:3]]
                  };
     }
-    return @{@"name": string};
+    return @{NSLocalizedString(@"name", nil): string};
 }
 
 enum dpkgComparisonResult {
@@ -218,7 +218,7 @@ BOOL compareDpkgVersion(NSString *version1, NSString *op, NSString *version2, BO
 NSArray *getDepsForPkg(NSString *pkg) {
     NSDictionary *pkgs = getPkgs();
     
-    return pkgs[pkg][@"Depends"];
+    return pkgs[pkg][NSLocalizedString(@"Depends", nil)];
 }
 
 NSArray *getPreDepsForPkg(NSString *pkg) {
@@ -255,11 +255,11 @@ NSArray *resolveDepsForPkgWithQueue(NSString *pkg, NSMutableArray *queue, BOOL p
         [or enumerateMatchesInString:dep options:0 range:NSMakeRange(0, dep.length) usingBlock:^(NSTextCheckingResult * _Nullable result, NSMatchingFlags flags, BOOL * _Nonnull stop) {
             NSString *match = [dep substringWithRange:[result rangeAtIndex:1]];
             NSDictionary *ver = parseDependsOrProvides(match);
-            //            LOG("Match: %@ op: %@ ver: %@", ver[@"name"], ver[@"op"], ver[@"ver"]);
-            match = ver[@"name"];
+            //            LOG("Match: %@ op: %@ ver: %@", ver[NSLocalizedString(@"name", nil)], ver[NSLocalizedString(@"op", nil)], ver[NSLocalizedString(@"ver", nil)]);
+            match = ver[NSLocalizedString(@"name", nil)];
             if (pkgs[match] != nil) {
-                if (ver[@"op"]) {
-                    compareDpkgVersion(pkgs[match][@"Version"], ver[@"op"], ver[@"ver"], &resolved);
+                if (ver[NSLocalizedString(@"op", nil)]) {
+                    compareDpkgVersion(pkgs[match][NSLocalizedString(@"Version", nil)], ver[NSLocalizedString(@"op", nil)], ver[NSLocalizedString(@"ver", nil)], &resolved);
                 } else {
                     resolved = YES;
                 }
@@ -279,12 +279,12 @@ NSArray *resolveDepsForPkgWithQueue(NSString *pkg, NSMutableArray *queue, BOOL p
             if (!resolved) {
 //                LOG("Unable to resolve dep: %@ for %@ - trying provides", dep, pkg);
                 for (NSString *pkg in pkgs.allKeys) {
-                    for (NSString *provide in pkgs[pkg][@"Provides"]) {
+                    for (NSString *provide in pkgs[pkg][NSLocalizedString(@"Provides", nil)]) {
                         NSDictionary *provided = parseDependsOrProvides(provide);
-                        if ([provided[@"name"] isEqualToString:match]) {
-                            if (ver[@"op"]) {
-                                if (provided[@"op"] && [provided[@"op"] isEqualToString:@"="]) {
-                                    compareDpkgVersion(provided[@"ver"], ver[@"op"], ver[@"ver"], &resolved);
+                        if ([provided[NSLocalizedString(@"name", nil)] isEqualToString:match]) {
+                            if (ver[NSLocalizedString(@"op", nil)]) {
+                                if (provided[NSLocalizedString(@"op", nil)] && [provided[NSLocalizedString(@"op", nil)] isEqualToString:@"="]) {
+                                    compareDpkgVersion(provided[NSLocalizedString(@"ver", nil)], ver[NSLocalizedString(@"op", nil)], ver[NSLocalizedString(@"ver", nil)], &resolved);
                                 }
                             } else {
                                 resolved = YES;
@@ -406,13 +406,13 @@ NSDictionary *getPkgs(void) {
         SafeFreeNULL(line);
         fclose(pkgs_file);
         
-        mpkgs[@"firmware"] = @{
-                               @"Version": [[UIDevice currentDevice] systemVersion],
-                               @"Filename": @"virtual"
+        mpkgs[NSLocalizedString(@"firmware", nil)] = @{
+                               NSLocalizedString(@"Version", nil): [[UIDevice currentDevice] systemVersion],
+                               NSLocalizedString(@"Filename", nil): NSLocalizedString(@"virtual", nil)
                                };
         mpkgs[@"firmware-sbin"] = @{
-                                    @"Version": @"0-1",
-                                    @"Filename": @"virtual"
+                                    NSLocalizedString(@"Version", nil): @"0-1",
+                                    NSLocalizedString(@"Filename", nil): NSLocalizedString(@"virtual", nil)
                                     };
         
         pkgs = [mpkgs copy];
@@ -422,23 +422,23 @@ NSDictionary *getPkgs(void) {
 
 NSString *debForPkg(NSString *pkg) {
     NSDictionary *pkgs = getPkgs();
-    NSString *file = pkgs[pkg][@"Filename"];
+    NSString *file = pkgs[pkg][NSLocalizedString(@"Filename", nil)];
     if (file == nil) {
         LOG(@"file == nil");
         return nil;
     }
-    if ([file isEqualToString:@"virtual"]) {
-        return @"virtual";
+    if ([file isEqualToString:NSLocalizedString(@"virtual", nil)]) {
+        return NSLocalizedString(@"virtual", nil);
     }
     
-    return pathForResource([@"apt" stringByAppendingPathComponent:file]);
+    return pathForResource([NSLocalizedString(@"apt", nil) stringByAppendingPathComponent:file]);
 }
 
 NSString *versionOfPkg(NSString *pkg) {
     NSDictionary *pkgs = getPkgs();
     
     if (pkgs[pkg])
-        return pkgs[pkg][@"Version"];
+        return pkgs[pkg][NSLocalizedString(@"Version", nil)];
     
     return nil;
 }
@@ -451,7 +451,7 @@ NSArray <NSString*> *debsForPkgs(NSArray <NSString*> *pkgs) {
             LOG("Unable to resolve %@ to a deb", pkg);
             return nil;
         }
-        if (![path isEqualToString:@"virtual"])
+        if (![path isEqualToString:NSLocalizedString(@"virtual", nil)])
             [paths addObject:path];
     }
     return [paths copy];

@@ -378,7 +378,7 @@ bool runDpkg(NSArray <NSString*> *args, bool forceDeps, bool forceAll) {
 }
 
 bool extractDeb(NSString *debPath, bool doInject) {
-    if (![debPath hasSuffix:@".deb"]) {
+    if (![debPath hasSuffix:NSLocalizedString(@".deb", nil)]) {
         LOG(@"%@: not a deb", debPath);
         return NO;
     }
@@ -443,7 +443,7 @@ bool extractDebs(NSArray <NSString *> *debPaths, bool doInject) {
 }
 
 bool installDeb(const char *debName, bool forceDeps) {
-    return runDpkg(@[@"-i", @(debName)], forceDeps, false);
+    return runDpkg(@[NSLocalizedString(@"-i", nil), @(debName)], forceDeps, false);
 }
 
 bool installDebs(NSArray <NSString*> *debs, bool forceDeps, bool forceAll) {
@@ -451,11 +451,11 @@ bool installDebs(NSArray <NSString*> *debs, bool forceDeps, bool forceAll) {
         LOG("%s: Nothing to install", __FUNCTION__);
         return false;
     }
-    return runDpkg([@[@"-i"] arrayByAddingObjectsFromArray:debs], forceDeps, forceAll);
+    return runDpkg([@[NSLocalizedString(@"-i", nil)] arrayByAddingObjectsFromArray:debs], forceDeps, forceAll);
 }
 
 bool removePkg(char *packageID, bool forceDeps) {
-    return runDpkg(@[@"-r", @(packageID)], forceDeps, false);
+    return runDpkg(@[NSLocalizedString(@"-r", nil), @(packageID)], forceDeps, false);
 }
 
 bool removePkgs(NSArray <NSString*> *pkgs, bool forceDeps) {
@@ -463,7 +463,7 @@ bool removePkgs(NSArray <NSString*> *pkgs, bool forceDeps) {
         LOG("%s: Nothing to remove", __FUNCTION__);
         return false;
     }
-    return runDpkg([@[@"-r"] arrayByAddingObjectsFromArray:pkgs], forceDeps, false);
+    return runDpkg([@[NSLocalizedString(@"-r", nil)] arrayByAddingObjectsFromArray:pkgs], forceDeps, false);
 }
 
 bool runApt(NSArray <NSString*> *args) {
@@ -473,9 +473,9 @@ bool runApt(NSArray <NSString*> *args) {
     }
     NSMutableArray <NSString*> *command = [NSMutableArray arrayWithArray:@[
                         @"/usr/bin/apt-get",
-                        @"-o", @"Dir::Etc::sourcelist=undecimus/undecimus.list",
-                        @"-o", @"Dir::Etc::sourceparts=-",
-                        @"-o", @"APT::Get::List-Cleanup=0"
+                        NSLocalizedString(@"-o", nil), @"Dir::Etc::sourcelist=undecimus/undecimus.list",
+                        NSLocalizedString(@"-o", nil), @"Dir::Etc::sourceparts=-",
+                        NSLocalizedString(@"-o", nil), @"APT::Get::List-Cleanup=0"
                         ]];
     [command addObjectsFromArray:args];
     
@@ -489,20 +489,20 @@ bool runApt(NSArray <NSString*> *args) {
 }
 
 bool aptUpdate() {
-    return runApt(@[@"update"]);
+    return runApt(@[NSLocalizedString(@"update", nil)]);
 }
 
 bool aptInstall(NSArray <NSString*> *pkgs) {
-    return runApt([@[@"-y", @"--allow-unauthenticated", @"--allow-downgrades", @"install"]
+    return runApt([@[NSLocalizedString(@"-y", nil), @"--allow-unauthenticated", @"--allow-downgrades", NSLocalizedString(@"install", nil)]
                      arrayByAddingObjectsFromArray:pkgs]);
 }
 
 bool aptUpgrade() {
-    return runApt(@[@"-y", @"--allow-unauthenticated", @"--allow-downgrades", @"-f", @"dist-upgrade"]);
+    return runApt(@[NSLocalizedString(@"-y", nil), @"--allow-unauthenticated", @"--allow-downgrades", NSLocalizedString(@"-f", nil), @"dist-upgrade"]);
 }
 
 bool aptRepair() {
-    return runApt(@[@"-o", @"Dir::Etc::preferences=undecimus/preferences", @"-o", @"Dir::Etc::preferencesparts=''", @"-y", @"--allow-unauthenticated", @"--allow-remove-essential", @"--allow-downgrades", @"-f", @"dist-upgrade"]);
+    return runApt(@[NSLocalizedString(@"-o", nil), @"Dir::Etc::preferences=undecimus/preferences", NSLocalizedString(@"-o", nil), @"Dir::Etc::preferencesparts=''", NSLocalizedString(@"-y", nil), @"--allow-unauthenticated", @"--allow-remove-essential", @"--allow-downgrades", NSLocalizedString(@"-f", nil), @"dist-upgrade"]);
 }
 
 bool extractAptPkgList(NSString *path, ArchiveFile* listcache, id_t owner)
@@ -1101,12 +1101,12 @@ bool daemonIsLoaded(char *daemonID) {
 
 NSString *bundledResourcesVersion() {
     NSBundle *bundle = [NSBundle mainBundle];
-    return [bundle objectForInfoDictionaryKey:@"BundledResources"];
+    return [bundle objectForInfoDictionaryKey:NSLocalizedString(@"BundledResources", nil)];
 }
 
 NSString *appVersion() {
     NSBundle *bundle = [NSBundle mainBundle];
-    return [bundle objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
+    return [bundle objectForInfoDictionaryKey:NSLocalizedString(@"CFBundleShortVersionString", nil)];
 }
 
 bool debuggerEnabled() {
@@ -1284,9 +1284,9 @@ bool installApp(const char *bundle) {
     NSURL *URL = [NSURL URLWithString:bundle_path];
     NSString *info_plist_path = [bundle_path stringByAppendingPathComponent:@"Info.plist"];
     NSMutableDictionary *info_plist = [NSMutableDictionary dictionaryWithContentsOfFile:info_plist_path];
-    NSString *bundle_identifier = info_plist[@"CFBundleIdentifier"];
+    NSString *bundle_identifier = info_plist[NSLocalizedString(@"CFBundleIdentifier", nil)];
     NSMutableDictionary *options = [NSMutableDictionary new];
-    options[@"CFBundleIdentifier"] = bundle_identifier;
+    options[NSLocalizedString(@"CFBundleIdentifier", nil)] = bundle_identifier;
     LSApplicationWorkspace *applicationWorkspace = [LSApplicationWorkspace defaultWorkspace];
     if ([applicationWorkspace installApplication:URL withOptions:options]) {
         return true;

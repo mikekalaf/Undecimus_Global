@@ -63,7 +63,7 @@
             if (read == nil)
                 continue;
             [outline appendString:read];
-            NSRange lastNewline = [read rangeOfString:@"\n" options:NSBackwardsSearch];
+            NSRange lastNewline = [read rangeOfString:NSLocalizedString(@"\n", nil) options:NSBackwardsSearch];
             if (lastNewline.location != NSNotFound) {
                 lastNewline.location = outline.length - (read.length - lastNewline.location);
                 NSRange wanted = {0, lastNewline.location + 1};
@@ -90,8 +90,8 @@
 
 - (void)initShortcuts {
     NSMutableArray *ShortcutItems = [[NSMutableArray alloc] init];
-    UIApplicationShortcutIcon *JailbreakIcon = [UIApplicationShortcutIcon iconWithTemplateImageName:@"maintenance"];
-    UIApplicationShortcutItem *JailbreakShortcut = [[UIApplicationShortcutItem alloc] initWithType:@"1" localizedTitle:@"Jailbreak" localizedSubtitle:nil icon:JailbreakIcon userInfo:nil];
+    UIApplicationShortcutIcon *JailbreakIcon = [UIApplicationShortcutIcon iconWithTemplateImageName:NSLocalizedString(@"maintenance", nil)];
+    UIApplicationShortcutItem *JailbreakShortcut = [[UIApplicationShortcutItem alloc] initWithType:@"1" localizedTitle:NSLocalizedString(@"Jailbreak", nil) localizedSubtitle:nil icon:JailbreakIcon userInfo:nil];
     [ShortcutItems addObject:JailbreakShortcut];
     [[UIApplication sharedApplication] setShortcutItems:ShortcutItems];
 }

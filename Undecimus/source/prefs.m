@@ -107,14 +107,14 @@ void register_default_prefs() {
     defaults[@K_LOAD_DAEMONS] = @YES;
     defaults[@K_DUMP_APTICKET] = @YES;
     defaults[@K_REFRESH_ICON_CACHE] = @NO;
-    defaults[@K_BOOT_NONCE] = @"0x1111111111111111";
+    defaults[@K_BOOT_NONCE] = NSLocalizedString(@"0x1111111111111111", nil);
     defaults[@K_DISABLE_AUTO_UPDATES] = @YES;
     defaults[@K_DISABLE_APP_REVOKES] = @YES;
     defaults[@K_OVERWRITE_BOOT_NONCE] = @YES;
     defaults[@K_EXPORT_KERNEL_TASK_PORT] = @NO;
     defaults[@K_RESTORE_ROOTFS] = @NO;
     defaults[@K_INCREASE_MEMORY_LIMIT] = @NO;
-    defaults[@K_ECID] = @"0x0";
+    defaults[@K_ECID] = NSLocalizedString(@"0x0", nil);
     defaults[@K_INSTALL_CYDIA] = @NO;
     defaults[@K_INSTALL_OPENSSH] = @NO;
     defaults[@K_RELOAD_SYSTEM_DAEMONS] = @YES;

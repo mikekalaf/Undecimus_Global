@@ -29,7 +29,7 @@
     } \
 while (false)
 
-#define notice(msg, wait, destructive) showAlert(@"Notice", msg, wait, destructive)
+#define notice(msg, wait, destructive) showAlert(NSLocalizedString(@"Notice", nil), msg, wait, destructive)
 
 #define status(msg, btnenbld, nvbenbld) do { \
     dispatch_async(dispatch_get_main_queue(), ^{ \
@@ -146,7 +146,7 @@ static inline void showAlertWithCancel(NSString *title, NSString *message, Boole
         JailbreakViewController *controller = [JailbreakViewController sharedController];
         [controller dismissViewControllerAnimated:YES completion:nil];
         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
-        UIAlertAction *OK = [UIAlertAction actionWithTitle:@"OK" style:destructive ? UIAlertActionStyleDestructive : UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        UIAlertAction *OK = [UIAlertAction actionWithTitle:NSLocalizedString(@"OK", nil) style:destructive ? UIAlertActionStyleDestructive : UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             controller.canExit = YES;
             if (wait)
                 dispatch_semaphore_signal(semaphore);

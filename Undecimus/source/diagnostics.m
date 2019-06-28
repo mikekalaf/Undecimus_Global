@@ -40,14 +40,14 @@ NSArray *parsedPackageArray() {
     NSArray *lineArray = [packageString componentsSeparatedByString:@"\n\n"];
     NSMutableArray *mutableList = [[NSMutableArray alloc] init];
     for (NSString *currentItem in lineArray) {
-        NSArray *packageArray = [currentItem componentsSeparatedByString:@"\n"];
+        NSArray *packageArray = [currentItem componentsSeparatedByString:NSLocalizedString(@"\n", nil)];
         NSMutableDictionary *currentPackage = [[NSMutableDictionary alloc] init];
         for (NSString *currentLine in packageArray) {
             NSArray *itemArray = [currentLine componentsSeparatedByString:@": "];
             if ([itemArray count] >= 2) {
                 NSString *key = [itemArray objectAtIndex:0];
                 NSString *object = [itemArray objectAtIndex:1];
-                if ([key isEqualToString:@"Depends"]) {
+                if ([key isEqualToString:NSLocalizedString(@"Depends", nil)]) {
                     NSArray *dependsObject = dependencyArrayFromString(object);
                     [currentPackage setObject:dependsObject forKey:key];
                 } else {
@@ -60,8 +60,8 @@ NSArray *parsedPackageArray() {
         }
         currentPackage = nil;
     }
-    NSSortDescriptor *nameDescriptor = [[NSSortDescriptor alloc] initWithKey:@"Name" ascending:YES selector:@selector(localizedCaseInsensitiveCompare:)];
-    NSSortDescriptor *packageDescriptor = [[NSSortDescriptor alloc] initWithKey:@"Package" ascending:YES selector:@selector(localizedCaseInsensitiveCompare:)];
+    NSSortDescriptor *nameDescriptor = [[NSSortDescriptor alloc] initWithKey:NSLocalizedString(@"Name", nil) ascending:YES selector:@selector(localizedCaseInsensitiveCompare:)];
+    NSSortDescriptor *packageDescriptor = [[NSSortDescriptor alloc] initWithKey:NSLocalizedString(@"Package", nil) ascending:YES selector:@selector(localizedCaseInsensitiveCompare:)];
     NSArray *descriptors = [NSArray arrayWithObjects:nameDescriptor, packageDescriptor, nil];
     NSArray *sortedArray = [mutableList sortedArrayUsingDescriptors:descriptors];
     mutableList = nil;
@@ -83,7 +83,7 @@ NSString *domainFromRepoObject(NSString *repoObject) {
 NSArray *sourcesFromFile(NSString *theSourceFile) {
     NSMutableArray *finalArray = [NSMutableArray new];
     NSString *sourceString = [[NSString stringWithContentsOfFile:theSourceFile encoding:NSASCIIStringEncoding error:nil] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-    NSArray *sourceFullArray =  [sourceString componentsSeparatedByString:@"\n"];
+    NSArray *sourceFullArray =  [sourceString componentsSeparatedByString:NSLocalizedString(@"\n", nil)];
     NSEnumerator *sourceEnum = [sourceFullArray objectEnumerator];
     NSString *currentSource = nil;
     while (currentSource = [sourceEnum nextObject]) {
@@ -107,37 +107,37 @@ NSDictionary *getDiagnostics() {
     char *machineName = getMachineName();
     assert(machineName != NULL);
     prefs_t *prefs = copy_prefs();
-    diagnostics[@"OSVersion"] = [NSString stringWithUTF8String:OSVersion];
-    diagnostics[@"OSProductVersion"] = [NSString stringWithUTF8String:OSProductVersion];
-    diagnostics[@"KernelVersion"] = [NSString stringWithUTF8String:kernelVersion];
-    diagnostics[@"MachineName"] = [NSString stringWithUTF8String:machineName];
-    diagnostics[@"Preferences"] = [NSMutableDictionary new];
-    diagnostics[@"Preferences"][@K_TWEAK_INJECTION] = [NSNumber numberWithBool:(BOOL)prefs->load_tweaks];
-    diagnostics[@"Preferences"][@K_LOAD_DAEMONS] = [NSNumber numberWithBool:(BOOL)prefs->load_daemons];
-    diagnostics[@"Preferences"][@K_DUMP_APTICKET] = [NSNumber numberWithBool:(BOOL)prefs->dump_apticket];
-    diagnostics[@"Preferences"][@K_REFRESH_ICON_CACHE] = [NSNumber numberWithBool:(BOOL)prefs->run_uicache];
-    diagnostics[@"Preferences"][@K_BOOT_NONCE] = [NSString stringWithUTF8String:(const char *)prefs->boot_nonce];
-    diagnostics[@"Preferences"][@K_DISABLE_AUTO_UPDATES] = [NSNumber numberWithBool:(BOOL)prefs->disable_auto_updates];
-    diagnostics[@"Preferences"][@K_DISABLE_APP_REVOKES] = [NSNumber numberWithBool:(BOOL)prefs->disable_app_revokes];
-    diagnostics[@"Preferences"][@K_OVERWRITE_BOOT_NONCE] = [NSNumber numberWithBool:(BOOL)prefs->overwrite_boot_nonce];
-    diagnostics[@"Preferences"][@K_EXPORT_KERNEL_TASK_PORT] = [NSNumber numberWithBool:(BOOL)prefs->export_kernel_task_port];
-    diagnostics[@"Preferences"][@K_RESTORE_ROOTFS] = [NSNumber numberWithBool:(BOOL)prefs->restore_rootfs];
-    diagnostics[@"Preferences"][@K_INCREASE_MEMORY_LIMIT] = [NSNumber numberWithBool:(BOOL)prefs->increase_memory_limit];
-    diagnostics[@"Preferences"][@K_ECID] = [NSString stringWithUTF8String:(const char *)prefs->ecid];
-    diagnostics[@"Preferences"][@K_INSTALL_CYDIA] = [NSNumber numberWithBool:(BOOL)prefs->install_cydia];
-    diagnostics[@"Preferences"][@K_INSTALL_OPENSSH] = [NSNumber numberWithBool:(BOOL)prefs->install_openssh];
-    diagnostics[@"Preferences"][@K_RELOAD_SYSTEM_DAEMONS] = [NSNumber numberWithBool:(BOOL)prefs->reload_system_daemons];
-    diagnostics[@"Preferences"][@K_RESET_CYDIA_CACHE] = [NSNumber numberWithBool:(BOOL)prefs->reset_cydia_cache];
-    diagnostics[@"Preferences"][@K_SSH_ONLY] = [NSNumber numberWithBool:(BOOL)prefs->ssh_only];
-    diagnostics[@"Preferences"][@K_ENABLE_GET_TASK_ALLOW] = [NSNumber numberWithBool:(BOOL)prefs->enable_get_task_allow];
-    diagnostics[@"Preferences"][@K_SET_CS_DEBUGGED] = [NSNumber numberWithBool:(BOOL)prefs->set_cs_debugged];
-    diagnostics[@"Preferences"][@K_HIDE_LOG_WINDOW] = [NSNumber numberWithBool:(BOOL)prefs->hide_log_window];
-    diagnostics[@"Preferences"][@K_EXPLOIT] = [NSNumber numberWithInt:(int)prefs->exploit];
-    diagnostics[@"AppVersion"] = [NSString stringWithString:appVersion()];
-    diagnostics[@"LogFile"] = [NSString stringWithContentsOfFile:getLogFile() encoding:NSUTF8StringEncoding error:nil];
-    diagnostics[@"Sources"] = [NSArray arrayWithArray:sourcesFromFile(CYDIA_LIST)];
-    diagnostics[@"Packages"] = [NSArray arrayWithArray:parsedPackageArray()];
-    diagnostics[@"Uptime"] = [NSNumber numberWithDouble:getUptime()];
+    diagnostics[NSLocalizedString(@"OSVersion", nil)] = [NSString stringWithUTF8String:OSVersion];
+    diagnostics[NSLocalizedString(@"OSProductVersion", nil)] = [NSString stringWithUTF8String:OSProductVersion];
+    diagnostics[NSLocalizedString(@"KernelVersion", nil)] = [NSString stringWithUTF8String:kernelVersion];
+    diagnostics[NSLocalizedString(@"MachineName", nil)] = [NSString stringWithUTF8String:machineName];
+    diagnostics[NSLocalizedString(@"Preferences", nil)] = [NSMutableDictionary new];
+    diagnostics[NSLocalizedString(@"Preferences", nil)][@K_TWEAK_INJECTION] = [NSNumber numberWithBool:(BOOL)prefs->load_tweaks];
+    diagnostics[NSLocalizedString(@"Preferences", nil)][@K_LOAD_DAEMONS] = [NSNumber numberWithBool:(BOOL)prefs->load_daemons];
+    diagnostics[NSLocalizedString(@"Preferences", nil)][@K_DUMP_APTICKET] = [NSNumber numberWithBool:(BOOL)prefs->dump_apticket];
+    diagnostics[NSLocalizedString(@"Preferences", nil)][@K_REFRESH_ICON_CACHE] = [NSNumber numberWithBool:(BOOL)prefs->run_uicache];
+    diagnostics[NSLocalizedString(@"Preferences", nil)][@K_BOOT_NONCE] = [NSString stringWithUTF8String:(const char *)prefs->boot_nonce];
+    diagnostics[NSLocalizedString(@"Preferences", nil)][@K_DISABLE_AUTO_UPDATES] = [NSNumber numberWithBool:(BOOL)prefs->disable_auto_updates];
+    diagnostics[NSLocalizedString(@"Preferences", nil)][@K_DISABLE_APP_REVOKES] = [NSNumber numberWithBool:(BOOL)prefs->disable_app_revokes];
+    diagnostics[NSLocalizedString(@"Preferences", nil)][@K_OVERWRITE_BOOT_NONCE] = [NSNumber numberWithBool:(BOOL)prefs->overwrite_boot_nonce];
+    diagnostics[NSLocalizedString(@"Preferences", nil)][@K_EXPORT_KERNEL_TASK_PORT] = [NSNumber numberWithBool:(BOOL)prefs->export_kernel_task_port];
+    diagnostics[NSLocalizedString(@"Preferences", nil)][@K_RESTORE_ROOTFS] = [NSNumber numberWithBool:(BOOL)prefs->restore_rootfs];
+    diagnostics[NSLocalizedString(@"Preferences", nil)][@K_INCREASE_MEMORY_LIMIT] = [NSNumber numberWithBool:(BOOL)prefs->increase_memory_limit];
+    diagnostics[NSLocalizedString(@"Preferences", nil)][@K_ECID] = [NSString stringWithUTF8String:(const char *)prefs->ecid];
+    diagnostics[NSLocalizedString(@"Preferences", nil)][@K_INSTALL_CYDIA] = [NSNumber numberWithBool:(BOOL)prefs->install_cydia];
+    diagnostics[NSLocalizedString(@"Preferences", nil)][@K_INSTALL_OPENSSH] = [NSNumber numberWithBool:(BOOL)prefs->install_openssh];
+    diagnostics[NSLocalizedString(@"Preferences", nil)][@K_RELOAD_SYSTEM_DAEMONS] = [NSNumber numberWithBool:(BOOL)prefs->reload_system_daemons];
+    diagnostics[NSLocalizedString(@"Preferences", nil)][@K_RESET_CYDIA_CACHE] = [NSNumber numberWithBool:(BOOL)prefs->reset_cydia_cache];
+    diagnostics[NSLocalizedString(@"Preferences", nil)][@K_SSH_ONLY] = [NSNumber numberWithBool:(BOOL)prefs->ssh_only];
+    diagnostics[NSLocalizedString(@"Preferences", nil)][@K_ENABLE_GET_TASK_ALLOW] = [NSNumber numberWithBool:(BOOL)prefs->enable_get_task_allow];
+    diagnostics[NSLocalizedString(@"Preferences", nil)][@K_SET_CS_DEBUGGED] = [NSNumber numberWithBool:(BOOL)prefs->set_cs_debugged];
+    diagnostics[NSLocalizedString(@"Preferences", nil)][@K_HIDE_LOG_WINDOW] = [NSNumber numberWithBool:(BOOL)prefs->hide_log_window];
+    diagnostics[NSLocalizedString(@"Preferences", nil)][@K_EXPLOIT] = [NSNumber numberWithInt:(int)prefs->exploit];
+    diagnostics[NSLocalizedString(@"AppVersion", nil)] = [NSString stringWithString:appVersion()];
+    diagnostics[NSLocalizedString(@"LogFile", nil)] = [NSString stringWithContentsOfFile:getLogFile() encoding:NSUTF8StringEncoding error:nil];
+    diagnostics[NSLocalizedString(@"Sources", nil)] = [NSArray arrayWithArray:sourcesFromFile(CYDIA_LIST)];
+    diagnostics[NSLocalizedString(@"Packages", nil)] = [NSArray arrayWithArray:parsedPackageArray()];
+    diagnostics[NSLocalizedString(@"Uptime", nil)] = [NSNumber numberWithDouble:getUptime()];
     SafeFreeNULL(OSVersion);
     SafeFreeNULL(OSProductVersion);
     SafeFreeNULL(kernelVersion);
