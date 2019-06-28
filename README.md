@@ -1,3 +1,5 @@
+##THIS IS A FORK FROM [pwn20wndstuff/Undecimus](https://github.com/pwn20wndstuff/Undecimus). I'm now working on adding multi-language(Simplified Chinese/Traditional Chinese/Japanese) support for unc0ver. If you are good at Japanese, you can contect me via [Twitter](https://twitter.com/xapenny2015). I'll be more than appericate if you can help me :)
+
 # unc0ver
 ### The most advanced jailbreak tool
 ![unc0ver logo](https://github.com/pwn20wndstuff/Undecimus/raw/master/Undecimus/Assets.xcassets/AppIcon.appiconset/Icon-App-60x60%403x.png)
@@ -5,6 +7,7 @@
 unc0ver jailbreak for iOS 11.0 - 12.1.2<br/>
 by [@pwn20wnd](https://twitter.com/Pwn20wnd) & [@sbingner](https://twitter.com/sbingner)<br/>
 UI by [@iOS_App_Dev](https://twitter.com/iOS_App_Dev) & [@HiMyNameIsUbik](https://twitter.com/HiMyNameIsUbik)<br/>
+UI Localization support by [@xapenny](https://twitter.com/xapenny2015)
 
 ## The most outstanding changes over the other jailbreaks
 * One app to jailbreak all firmwares
