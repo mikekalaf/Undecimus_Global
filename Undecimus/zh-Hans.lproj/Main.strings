@@ -38,18 +38,6 @@
 /* Class = "UIButton"; normalTitle = "Share Diagnostics Data"; ObjectID = "8U8-1D-Tj2"; */
 "8U8-1D-Tj2.normalTitle" = "分享诊断数据";
 
-/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "9r5-4K-fy9"; */
-"9r5-4K-fy9.normalTitle" = "Button";
-
-/* Class = "UILabel"; text = "u0"; ObjectID = "A1X-qf-Qzr"; */
-"A1X-qf-Qzr.text" = "u0";
-
-/* Class = "UITextField"; placeholder = "exploit"; ObjectID = "ATy-h0-ALy"; */
-"ATy-h0-ALy.placeholder" = "exploit";
-
-/* Class = "UITextField"; text = "exploit"; ObjectID = "ATy-h0-ALy"; */
-"ATy-h0-ALy.text" = "exploit";
-
 /* Class = "UIButton"; normalTitle = "@iBSparkes (Development)"; ObjectID = "Aay-Mz-cvw"; */
 "Aay-Mz-cvw.normalTitle" = "@iBSparkes (开发者)";
 
@@ -79,9 +67,6 @@
 
 /* Class = "UILabel"; text = "UI by"; ObjectID = "EAd-Mn-rsm"; */
 "EAd-Mn-rsm.text" = "UI设计";
-
-/* Class = "UIButton"; normalTitle = "placeholder"; ObjectID = "ELb-9J-7YK"; */
-"ELb-9J-7YK.normalTitle" = "placeholder";
 
 /* Class = "UILabel"; text = "Set CS_DEBUGGED"; ObjectID = "Eq9-Ns-zey"; */
 "Eq9-Ns-zey.text" = "设置 CS_DEBUGGED";
@@ -146,17 +131,11 @@
 /* Class = "UILabel"; text = "Refresh Icon Cache"; ObjectID = "SVp-PX-97M"; */
 "SVp-PX-97M.text" = "重建图标缓存";
 
-/* Class = "UITextField"; placeholder = "XXXXXXXXXXXXXXXX"; ObjectID = "T5g-8V-gBQ"; */
-"T5g-8V-gBQ.placeholder" = "XXXXXXXXXXXXXXXX";
-
 /* Class = "UILabel"; text = "Uptime"; ObjectID = "TmA-aA-qbT"; */
 "TmA-aA-qbT.text" = "已越狱";
 
 /* Class = "UIButton"; normalTitle = "@theninjaprawn (Development)"; ObjectID = "V0w-3F-HRY"; */
 "V0w-3F-HRY.normalTitle" = "@theninjaprawn (开发者)";
-
-/* Class = "UIButton"; normalTitle = "@HiMyNameIsUbik"; ObjectID = "V2Q-wP-Ruc"; */
-"V2Q-wP-Ruc.normalTitle" = "@HiMyNameIsUbik";
 
 /* Class = "UINavigationItem"; title = "Settings"; ObjectID = "VHD-vl-rR6"; */
 "VHD-vl-rR6.title" = "设置";
@@ -197,9 +176,6 @@
 /* Class = "UILabel"; text = "Load Daemons"; ObjectID = "bBi-OR-hpE"; */
 "bBi-OR-hpE.text" = "加载进程";
 
-/* Class = "UITextView"; text = "[*] unc0ver Version: 3.1.3+7.gf5833f2\n[*] Machine Name: iPhone10,5\n[*] Model Name: D211AP\n[*] Kernel Version: Darwin Kernel Version 18.7.0: Tue May 21 01:53:36 PDT 2019; root:xnu-4903.270.29~10/RELEASE_ARM64_T8015\n[*] Kernel Page Size: 0x4000\n[*] System Version: iOS 12.4 (Beta) (Build: 16G5038d)\n[*] Bundled Resources Version: 1.0~b21\n[*] Status: Unsupported\n[*] Progress: Unsupported\n[MC] System group container for systemgroup.com.apple.configurationprofiles path is /private/var/containers/Shared/SystemGroup/systemgroup.com.apple.configurationprofiles\n[MC] Reading from public effective user settings.\n"; ObjectID = "bvv-3a-l9y"; */
-"bvv-3a-l9y.text" = "[*] unc0ver Version: 3.1.3+7.gf5833f2\n[*] Machine Name: iPhone10,5\n[*] Model Name: D211AP\n[*] Kernel Version: Darwin Kernel Version 18.7.0: Tue May 21 01:53:36 PDT 2019; root:xnu-4903.270.29~10/RELEASE_ARM64_T8015\n[*] Kernel Page Size: 0x4000\n[*] System Version: iOS 12.4 (Beta) (Build: 16G5038d)\n[*] Bundled Resources Version: 1.0~b21\n[*] Status: Unsupported\n[*] Progress: Unsupported\n[MC] System group container for systemgroup.com.apple.configurationprofiles path is /private/var/containers/Shared/SystemGroup/systemgroup.com.apple.configurationprofiles\n[MC] Reading from public effective user settings.\n";
-
 /* Class = "UIButton"; normalTitle = "@MiscMisty (Development)"; ObjectID = "cUa-LX-1Nb"; */
 "cUa-LX-1Nb.normalTitle" = "@MiscMisty (开发者)";
 
@@ -229,18 +205,6 @@
 
 /* Class = "UIButton"; normalTitle = "@_bazad (Development)"; ObjectID = "k2H-ae-KOW"; */
 "k2H-ae-KOW.normalTitle" = "@_bazad (开发者)";
-
-/* Class = "UIButton"; normalTitle = "@sbingner"; ObjectID = "lRa-u8-NKk"; */
-"lRa-u8-NKk.normalTitle" = "@sbingner";
-
-/* Class = "UIButton"; normalTitle = "@iOS_App_Dev"; ObjectID = "lT4-cI-YDK"; */
-"lT4-cI-YDK.normalTitle" = "@iOS_App_Dev";
-
-/* Class = "UITextField"; placeholder = "0x292dd10b56d87a3a"; ObjectID = "lf3-Mh-TY2"; */
-"lf3-Mh-TY2.placeholder" = "0x292dd10b56d87a3a";
-
-/* Class = "UILabel"; text = "jailbreak"; ObjectID = "lko-Ud-SBp"; */
-"lko-Ud-SBp.text" = "jailbreak";
 
 /* Class = "UIButton"; normalTitle = "@Cryptiiic (Testing)"; ObjectID = "llG-m4-fQ6"; */
 "llG-m4-fQ6.normalTitle" = "@Cryptiiic (测试)";
@@ -288,4 +252,4 @@
 "ymO-Kj-nkN.title" = "团队";
 
 /* Class = "UILabel"; text = "for iOS 11.0 - 12.1.2"; ObjectID = "zFb-Nx-58A"; */
-"zFb-Nx-58A.text" = "for iOS 11.0 - 12.1.2";
+"zFb-Nx-58A.text" = "支持 iOS 11.0 - 12.1.2";

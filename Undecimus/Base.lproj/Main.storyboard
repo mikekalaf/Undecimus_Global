@@ -178,9 +178,9 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="placeholder" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ITG-pW-yHc">
-                                        <rect key="frame" x="26" y="511" width="270" height="27"/>
+                                        <rect key="frame" x="16" y="511" width="290" height="27"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="270" id="8Hg-VK-r3N"/>
+                                            <constraint firstAttribute="width" constant="290" id="8Hg-VK-r3N"/>
                                             <constraint firstAttribute="height" constant="27" id="Wq8-Wy-mM5"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="RobotoMono-Regular" family="Roboto Mono" pointSize="8.5"/>
@@ -244,7 +244,7 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8W0-Si-Gim">
-                                                <rect key="frame" x="80.5" y="32.5" width="139" height="14"/>
+                                                <rect key="frame" x="69" y="32.5" width="162.5" height="14"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="by " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E4E-uK-b4Q">
                                                         <rect key="frame" x="0.0" y="0.0" width="18.5" height="14"/>
@@ -268,7 +268,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lRa-u8-NKk">
-                                                        <rect key="frame" x="94" y="0.0" width="55" height="14"/>
+                                                        <rect key="frame" x="100" y="0.0" width="55" height="14"/>
                                                         <fontDescription key="fontDescription" name="RobotoMono-Regular" family="Roboto Mono" pointSize="10"/>
                                                         <state key="normal" title="@sbingner"/>
                                                         <connections>
@@ -295,17 +295,17 @@
                                                     <constraint firstAttribute="bottom" secondItem="Zd3-Uw-Mck" secondAttribute="bottom" id="ky3-Vf-j8D"/>
                                                     <constraint firstItem="BXF-lt-fpr" firstAttribute="top" secondItem="8W0-Si-Gim" secondAttribute="top" id="oOQ-Rv-6PF"/>
                                                     <constraint firstAttribute="bottom" secondItem="lRa-u8-NKk" secondAttribute="bottom" id="pT4-l8-dJh"/>
-                                                    <constraint firstAttribute="width" constant="139" id="sgf-2O-Oad"/>
+                                                    <constraint firstAttribute="width" constant="162.5" id="sgf-2O-Oad"/>
                                                 </constraints>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="for iOS 11.0 - 12.1.2" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zFb-Nx-58A">
-                                                <rect key="frame" x="87" y="19" width="126" height="13.5"/>
+                                                <rect key="frame" x="87" y="19" width="126.5" height="13.5"/>
                                                 <fontDescription key="fontDescription" name="RobotoMono-Regular" family="Roboto Mono" pointSize="10"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sFD-j5-FB8">
-                                                <rect key="frame" x="35" y="46.5" width="230" height="14"/>
+                                                <rect key="frame" x="42.5" y="46.5" width="215" height="14"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="UI by" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EAd-Mn-rsm">
                                                         <rect key="frame" x="0.0" y="0.0" width="30.5" height="14"/>
@@ -325,14 +325,14 @@
                                                         </connections>
                                                     </button>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="&amp;" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sY1-7R-L1x">
-                                                        <rect key="frame" x="120" y="0.0" width="7" height="14"/>
+                                                        <rect key="frame" x="122.5" y="0.0" width="7" height="14"/>
                                                         <fontDescription key="fontDescription" name="RobotoMono-Regular" family="Roboto Mono" pointSize="10"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                         <size key="shadowOffset" width="0.0" height="0.0"/>
                                                     </label>
                                                     <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V2Q-wP-Ruc">
-                                                        <rect key="frame" x="135" y="0.0" width="80" height="14"/>
+                                                        <rect key="frame" x="128" y="0.0" width="80" height="14"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="14" id="2mq-cp-VOl"/>
                                                         </constraints>
@@ -353,10 +353,10 @@
                                                     <constraint firstItem="EAd-Mn-rsm" firstAttribute="leading" secondItem="sFD-j5-FB8" secondAttribute="leading" id="T6w-40-K6V"/>
                                                     <constraint firstAttribute="bottom" secondItem="sY1-7R-L1x" secondAttribute="bottom" id="Vot-3Y-Ktf"/>
                                                     <constraint firstAttribute="bottom" secondItem="V2Q-wP-Ruc" secondAttribute="bottom" id="X9O-cx-5k5"/>
-                                                    <constraint firstAttribute="width" constant="230" id="aBa-g4-kyl"/>
+                                                    <constraint firstAttribute="width" constant="215" id="aBa-g4-kyl"/>
                                                     <constraint firstAttribute="trailing" secondItem="V2Q-wP-Ruc" secondAttribute="trailing" id="h2H-B9-VMd"/>
                                                     <constraint firstAttribute="bottom" secondItem="lT4-cI-YDK" secondAttribute="bottom" id="kN8-Sy-Npf"/>
-                                                    <constraint firstItem="sY1-7R-L1x" firstAttribute="leading" secondItem="lT4-cI-YDK" secondAttribute="trailing" constant="2" id="o4e-QI-dBC"/>
+                                                    <constraint firstItem="sY1-7R-L1x" firstAttribute="leading" secondItem="lT4-cI-YDK" secondAttribute="trailing" id="o4e-QI-dBC"/>
                                                     <constraint firstItem="EAd-Mn-rsm" firstAttribute="top" secondItem="sFD-j5-FB8" secondAttribute="top" id="v1X-IP-Hn9"/>
                                                 </constraints>
                                             </view>
