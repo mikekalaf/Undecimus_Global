@@ -49,14 +49,14 @@ extern int maxStage;
         status(localize(NSLocalizedString(@"Unsupported", nil)), false, true);
         progress(localize(NSLocalizedString(@"Unsupported", nil)));
     } else if (prefs->restore_rootfs) {
-        status(localize(@"Restore RootFS"), true, true);
-        progress(localize(@"Ready to restore RootFS"));
+        status(localize(NSLocalizedString(@"Restore RootFS", nil)), true, true);
+        progress(localize(NSLocalizedString(@"Ready to restore RootFS", nil)));
     } else if (jailbreakEnabled()) {
-        status(localize(@"Re-Jailbreak"), true, true);
-        progress(localize(@"Ready to re-jailbreak"));
+        status(localize(NSLocalizedString(@"Re-Jailbreak",nil)), true, true);
+        progress(localize(NSLocalizedString(@"Ready to re-jailbreak", nil)));
     } else {
         status(localize(NSLocalizedString(@"Jailbreak", nil)), true, true);
-        progress(localize(@"Ready to jailbreak"));
+        progress(localize(NSLocalizedString(@"Ready to jailbreak",nil)));
     }
     
     release_prefs(&prefs);
@@ -101,7 +101,7 @@ extern int maxStage;
     [self.creditsNavBar setShadowImage:[UIImage new]];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showSpeicalThanks:) name:NSLocalizedString(@"showSpecialThanks", nil) object:nil];
     [self.exploitProgressLabel setText:[NSString stringWithFormat:@"%d/%d", 0, maxStage]];
-    [self.uOVersionLabel setText:[NSString stringWithFormat:@"UI Localization by xapenny | u0 Version: %@", appVersion()]];
+    [self.uOVersionLabel setText:[NSString stringWithFormat:NSLocalizedString(@"UI Localization by xapenny | u0 Version: %@", nil), appVersion()]];
     
     sharedController = self;
     bundledResources = bundledResourcesVersion();
@@ -110,7 +110,7 @@ extern int maxStage;
     LOG("Bundled Resources Version: %@", bundledResources);
     if (bundledResources == nil) {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0ul), ^{
-            showAlert(localize(NSLocalizedString(@"Error", nil)), localize(@"Bundled Resources version is missing. This build is invalid."), false, false);
+            showAlert(localize(NSLocalizedString(@"Error", nil)), localize(NSLocalizedString(@"Bundled Resources version is missing. This build is invalid.", nil)), false, false);
         });
     }
 }

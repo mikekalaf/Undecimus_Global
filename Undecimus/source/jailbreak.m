@@ -1319,7 +1319,7 @@ void jailbreak()
         
         if (debsToInstall.count > 0) {
             LOG("Installing manually exctracted debs...");
-            _assert(installDebs(debsToInstall, true, true), localize(@"Unable to install manually extracted debs."), true);
+            _assert(installDebs(debsToInstall, true, true), localize(NSLocalizedString(@"Unable to install manually extracted debs.", nil)), true);
         }
         
         _assert(ensure_directory("/etc/apt/undecimus", root_pw->pw_uid, 0755), localize(@"Unable to create local repo."), true);
@@ -1341,23 +1341,23 @@ void jailbreak()
         }
         init_file(prefsPath, root_pw->pw_uid, 0644);
         NSString *const repoPath = pathForResource(NSLocalizedString(@"apt", nil));
-        _assert(repoPath != nil, localize(@"Unable to get repo path."), true);
+        _assert(repoPath != nil, localize(NSLocalizedString(@"Unable to get repo path.", nil)), true);
         ensure_directory("/var/lib/undecimus", root_pw->pw_uid, 0755);
         ensure_symlink([repoPath UTF8String], "/var/lib/undecimus/apt");
         if (!pkgIsConfigured("apt1.4") || !aptUpdate()) {
             NSArray *const aptNeeded = resolveDepsForPkg(@"apt1.4", false);
-            _assert(aptNeeded != nil && aptNeeded.count > 0, localize(@"Unable to resolve dependencies for apt."), true);
+            _assert(aptNeeded != nil && aptNeeded.count > 0, localize(NSLocalizedString(@"Unable to resolve dependencies for apt.", nil)), true);
             NSArray <NSString *> *const aptDebs = debsForPkgs(aptNeeded);
-            _assert(installDebs(aptDebs, true, true), localize(@"Unable to install debs for apt."), true);
-            _assert(aptUpdate(), localize(@"Unable to update apt package index."), true);
-            _assert(aptRepair(), localize(@"Unable to repair system."), true);
+            _assert(installDebs(aptDebs, true, true), localize(NSLocalizedString(@"Unable to install debs for apt.", nil)), true);
+            _assert(aptUpdate(), localize(NSLocalizedString(@"Unable to update apt package index.", nil)), true);
+            _assert(aptRepair(), localize(NSLocalizedString(@"Unable to repair system.", nil)), true);
         }
         
         // Workaround for what appears to be an apt bug
         ensure_symlink("/var/lib/undecimus/apt/./Packages", "/var/lib/apt/lists/_var_lib_undecimus_apt_._Packages");
         
         if (!aptInstall(@[NSLocalizedString(@"-f", nil)])) {
-            _assert(aptRepair(), localize(@"Unable to repair system."), true);
+            _assert(aptRepair(), localize(NSLocalizedString(@"Unable to repair system.", nil)), true);
         }
         
         // Dpkg and apt both work now

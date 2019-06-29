@@ -299,7 +299,7 @@
         set_prefs(prefs);
         release_prefs(&prefs);
     } else {
-        UIAlertController *const alertController = [UIAlertController alertControllerWithTitle:localize(@"Invalid Entry") message:localize(@"The boot nonce entered could not be parsed") preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertController *const alertController = [UIAlertController alertControllerWithTitle:localize(NSLocalizedString(@"Invalid Entry", nil)) message:localize(NSLocalizedString(@"The boot nonce entered could not be parsed", nil)) preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction *const OK = [UIAlertAction actionWithTitle:localize(NSLocalizedString(@"OK", nil)) style:UIAlertActionStyleDefault handler:nil];
         [alertController addAction:OK];
         [self presentViewController:alertController animated:YES completion:nil];
@@ -390,7 +390,7 @@
 
 - (IBAction)tappedOnRestart:(id)sender {
     void (^const block)(void) = ^(void) {
-        notice(localize(@"The device will be restarted."), true, false);
+        notice(localize(NSLocalizedString(@"The device will be restarted.", nil)), true, false);
         NSInteger const support = recommendedRestartSupport();
         switch (support) {
             case necp_exploit: {
@@ -448,7 +448,7 @@
 }
 
 - (IBAction)tappedOnCopyNonce:(id)sender{
-    UIAlertController *const copyBootNonceAlert = [UIAlertController alertControllerWithTitle:localize(@"Copy boot nonce?") message:localize(@"Would you like to copy nonce generator to clipboard?") preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertController *const copyBootNonceAlert = [UIAlertController alertControllerWithTitle:localize(NSLocalizedString(@"Copy boot nonce?", nil)) message:localize(NSLocalizedString(@"Would you like to copy nonce generator to clipboard?", nil)) preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *const copyAction = [UIAlertAction actionWithTitle:localize(NSLocalizedString(@"Yes", nil)) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         prefs_t *prefs = copy_prefs();
         [[UIPasteboard generalPasteboard] setString:@(prefs->boot_nonce)];
@@ -461,7 +461,7 @@
 }
 
 - (IBAction)tappedOnCopyECID:(id)sender {
-    UIAlertController *const copyBootNonceAlert = [UIAlertController alertControllerWithTitle:localize(@"Copy ECID?") message:localize(@"Would you like to copy ECID to clipboard?") preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertController *const copyBootNonceAlert = [UIAlertController alertControllerWithTitle:localize(NSLocalizedString(@"Copy ECID?", nil)) message:localize(NSLocalizedString(@"Would you like to copy ECID to clipboard?",nil)) preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *const copyAction = [UIAlertAction actionWithTitle:localize(NSLocalizedString(@"Yes", nil)) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         prefs_t *prefs = copy_prefs();
         [[UIPasteboard generalPasteboard] setString:hexFromInt(@(prefs->ecid).integerValue)];
@@ -477,11 +477,11 @@
     void (^const block)(void) = ^(void) {
         NSString *const update = [NSString stringWithContentsOfURL:[NSURL URLWithString:@"https://github.com/pwn20wndstuff/Undecimus/raw/master/Update.txt"] encoding:NSUTF8StringEncoding error:nil];
         if (update == nil) {
-            notice(localize(@"Failed to check for update."), true, false);
+            notice(localize(NSLocalizedString(@"Failed to check for update.", nil)), true, false);
         } else if ([update compare:appVersion() options:NSNumericSearch] == NSOrderedDescending) {
-            notice(localize(@"An update is available."), true, false);
+            notice(localize(NSLocalizedString(@"An update is available.", nil)), true, false);
         } else {
-            notice(localize(@"Already up to date."), true, false);
+            notice(localize(NSLocalizedString(@"Already up to date.", nil)), true, false);
         }
     };
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0ul), block);
@@ -550,13 +550,13 @@
 
 - (IBAction)tappedRestartSpringBoard:(id)sender {
     void (^const block)(void) = ^(void) {
-        notice(localize(@"SpringBoard will be restarted."), true, false);
+        notice(localize(NSLocalizedString(@"SpringBoard will be restarted.", nil)), true, false);
         NSInteger const support = recommendedRespringSupport();
         switch (support) {
             case deja_xnu_exploit: {
                 mach_port_t const bb_tp = hid_event_queue_exploit();
-                _assert(MACH_PORT_VALID(bb_tp), localize(@"Unable to get task port for backboardd."), true);
-                _assert(thread_call_remote(bb_tp, exit, 1, REMOTE_LITERAL(EXIT_SUCCESS)) == ERR_SUCCESS, localize(@"Unable to make backboardd exit."), true);
+                _assert(MACH_PORT_VALID(bb_tp), localize(NSLocalizedString(@"Unable to get task port for backboardd.", nil)), true);
+                _assert(thread_call_remote(bb_tp, exit, 1, REMOTE_LITERAL(EXIT_SUCCESS)) == ERR_SUCCESS, localize(NSLocalizedString(@"Unable to make backboardd exit.", nil)), true);
                 break;
             }
             default:
@@ -569,7 +569,7 @@
 
 - (IBAction)tappedOnCleanDiagnosticsData:(id)sender {
     cleanLogs();
-    notice(localize(@"Cleaned diagnostics data."), false, false);
+    notice(localize(NSLocalizedString(@"Cleaned diagnostics data.", nil)), false, false);
 }
 
 - (IBAction)hideLogWindowSwitchValueChanged:(id)sender {
@@ -579,7 +579,7 @@
     release_prefs(&prefs);
     [self reloadData];
     void (^const block)(void) = ^(void) {
-        notice(localize(@"Preference was changed. The app will now exit."), true, false);
+        notice(localize(NSLocalizedString(@"Preference was changed. The app will now exit.", nil)), true, false);
         exit(EXIT_SUCCESS);
     };
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0ul), block);
@@ -628,14 +628,14 @@
 - (IBAction)tappedOnResetAppPreferences:(id)sender {
     void (^const block)(void) = ^(void) {
         reset_prefs();
-        notice(localize(@"Preferences were reset. The app will now exit."), true, false);
+        notice(localize(NSLocalizedString(@"Preferences were reset. The app will now exit.", nil)), true, false);
         exit(EXIT_SUCCESS);
     };
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0ul), block);
 }
 
 - (IBAction)tappedOnLoadTweaksInfoButton:(id)sender {
-    showAlert(localize(@"Load Tweaks"),
+    showAlert(localize(NSLocalizedString(@"Load Tweaks", nil)),
               localize(NSLocalizedString(@"Description:"
                        "\n\n"
                        "This option makes Substrate load extensions that are commonly referred to as tweaks in newly started processes."
@@ -649,7 +649,7 @@
 }
 
 - (IBAction)tappedOnLoadDaemonsInfoButton:(id)sender {
-    showAlert(localize(@"Load Daemons"),
+    showAlert(localize(NSLocalizedString(@"Load Daemons", nil)),
               localize(NSLocalizedString(@"Description:"
                        "\n\n"
                        "This option makes the jailbreak load the launch daemons located at /Library/LaunchDaemons and execute files located at /etc/rc.d."
@@ -663,7 +663,7 @@
 }
 
 - (IBAction)tappedOnDumpAPTicketInfoButton:(id)sender {
-    showAlert(localize(@"Dump APTicket"),
+    showAlert(localize(NSLocalizedString(@"Dump APTicket", nil)),
               localize(NSLocalizedString(@"Description:"
                        "\n\n"
                        "This option makes the jailbreak create a copy of the system APTicket located at /System/Library/Caches/apticket.der at its Documents directory which is accessible via iTunes File Sharing."
@@ -677,7 +677,7 @@
 }
 
 - (IBAction)tappedOnRefreshIconCacheInfoButton:(id)sender {
-    showAlert(localize(@"Refresh Icon Cache"),
+    showAlert(localize(NSLocalizedString(@"Refresh Icon Cache", nil)),
               localize(NSLocalizedString(@"Description:"
                        "\n\n"
                        "This option makes the jailbreak regenerate SpringBoard's system application installation cache to cause newly installed .app bundles to appear on the icon list."
@@ -691,7 +691,7 @@
 }
 
 - (IBAction)tappedOnDisableAutoUpdatesInfoButton:(id)sender {
-    showAlert(localize(@"Disable Updates"),
+    showAlert(localize(NSLocalizedString(@"Disable Updates", nil)),
               localize(NSLocalizedString(@"Description:"
                        "\n\n"
                        "This option makes the jailbreak effectively disable the system's software update mechanism to prevent the system from automatically upgrading to the latest available firmware which may not be supported by the jailbreak at that time."
@@ -705,7 +705,7 @@
 }
 
 - (IBAction)tappedOnDisableAppRevokesInfoButton:(id)sender {
-    showAlert(localize(@"Disable Revokes"),
+    showAlert(localize(NSLocalizedString(@"Disable Revokes", nil)),
               localize(NSLocalizedString(@"Description:"
                        "\n\n"
                        "This option makes the jailbreak effectively disable the system's online certificate status protocol system to prevent enterprise certificates which the jailbreak may be signed with from getting revoked."
@@ -719,7 +719,7 @@
 }
 
 - (IBAction)tappedOnOverwriteBootNonceInfoButton:(id)sender {
-    showAlert(localize(@"Set Boot Nonce"),
+    showAlert(localize(NSLocalizedString(@"Set Boot Nonce", nil)),
               localize(NSLocalizedString(@"Description:"
                        "\n\n"
                        "This option makes the jailbreak set the persistent com.apple.System.boot-nonce variable in non-volatile random-access memory (NVRAM) which may be required to downgrade to an unsigned iOS firmware by using SHSH files."
@@ -733,7 +733,7 @@
 }
 
 - (IBAction)tappedOnExportKernelTaskPortInfoButton:(id)sender {
-    showAlert(localize(@"Export TFP0"),
+    showAlert(localize(NSLocalizedString(@"Export TFP0", nil)),
               localize(NSLocalizedString(@"Description:"
                        "\n\n"
                        "This option makes the jailbreak modify the host-port to grant any process access to the host-priv-port."
@@ -751,7 +751,7 @@
 }
 
 - (IBAction)tappedOnRestoreRootFSInfoButton:(id)sender {
-    showAlert(localize(@"Restore RootFS"),
+    showAlert(localize(NSLocalizedString(@"Restore RootFS", nil)),
               localize(NSLocalizedString(@"Description:"
                        "\n\n"
                        "This option makes the jailbreak restore the root filesystem (RootFS) to the snapshot which is created by the system when the device is restored."
@@ -767,7 +767,7 @@
 }
 
 - (IBAction)tappedOnIncreaseMemoryLimitInfoButton:(id)sender {
-    showAlert(localize(@"Max Memory Limit"),
+    showAlert(localize(NSLocalizedString(@"Max Memory Limit", nil)),
               localize(NSLocalizedString(@"Description:"
                        "\n\n"
                        "This option makes the jailbreak modify the Jetsam configuration file to increase the memory limit that is enforced upon processes by Jetsam to the maximum value to effectively bypass that mechanism."
@@ -781,7 +781,7 @@
 }
 
 - (IBAction)tappedOnInstallSSHInfoButton:(id)sender {
-    showAlert(localize(@"(Re)Install OpenSSH"),
+    showAlert(localize(NSLocalizedString(@"(Re)Install OpenSSH", nil)),
               localize(NSLocalizedString(@"Description:"
                        "\n\n"
                        "This option makes the jailbreak (re)install the openssh package."
@@ -795,7 +795,7 @@
 }
 
 - (IBAction)tappedOnInstallCydiaInfoButton:(id)sender {
-    showAlert(localize(@"Reinstall Cydia"),
+    showAlert(localize(NSLocalizedString(@"Reinstall Cydia", nil)),
               localize(NSLocalizedString(@"Description:"
                        "\n\n"
                        "This option makes jailbreak reinstall the cydiainstaller package."
@@ -809,7 +809,7 @@
 }
 
 - (IBAction)tappedOnReloadSystemDaemonsInfoButton:(id)sender {
-    showAlert(localize(@"Reload Daemons"),
+    showAlert(localize(NSLocalizedString(@"Reload Daemons", nil)),
               localize(NSLocalizedString(@"Description:"
                        "\n\n"
                        "This option makes the jailbreak reload all of the running system daemons to make the Substrate extensions (tweaks) load in them."
@@ -823,7 +823,7 @@
 }
 
 - (IBAction)tappedOnHideLogWindowInfoButton:(id)sender {
-    showAlert(localize(@"Hide Log Window"),
+    showAlert(localize(NSLocalizedString(@"Hide Log Window", nil)),
               localize(NSLocalizedString(@"Description:"
                        "\n\n"
                        "This option hides the log window or console in the jailbreak app for a more clean look.", nil)
@@ -833,7 +833,7 @@
 }
 
 - (IBAction)tappedOnResetCydiaCacheInfoButton:(id)sender {
-    showAlert(localize(@"Reset Cydia Cache"),
+    showAlert(localize(NSLocalizedString(@"Reset Cydia Cache", nil)),
               localize(NSLocalizedString(@"Description:"
                        "\n\n"
                        "This option makes the jailbreak reset Cydia's cache."
@@ -849,7 +849,7 @@
 }
 
 - (IBAction)tappedOnSSHOnlyInfoButton:(id)sender {
-    showAlert(localize(@"SSH Only"),
+    showAlert(localize(NSLocalizedString(@"SSH Only", nil)),
               localize(NSLocalizedString(@"Description:"
                        "\n\n"
                        "This option makes the jailbreak skip installing Cydia and Substrate."
@@ -865,7 +865,7 @@
 }
 
 - (IBAction)tappedOnEnableGetTaskAllowInfoButton:(id)sender {
-    showAlert(localize(@"Set get-task-allow"),
+    showAlert(localize(NSLocalizedString(@"Set get-task-allow", nil)),
               localize(NSLocalizedString(@"Description:"
                        "\n\n"
                        "This option makes the jailbreak dynamically enable the get-task-allow entitlement for every new process."
@@ -882,7 +882,7 @@
               false);
 }
 - (IBAction)tappedOnCSDebuggedInfoButton:(id)sender {
-    showAlert(localize(@"Set CS_DEBUGGED"),
+    showAlert(localize(NSLocalizedString(@"Set CS_DEBUGGED", nil)),
               localize(NSLocalizedString(@"Description:"
                        "\n\n"
                        "This option makes the jailbreak dynamically set the CS_DEBUGGED codesign flag for every new process."
@@ -897,7 +897,7 @@
               false);
 }
 - (IBAction)tappedOnAutoRespringInfoButton:(id)sender {
-    showAlert(localize(@"Auto Respring"),
+    showAlert(localize(NSLocalizedString(@"Auto Respring", nil)),
               localize(NSLocalizedString(@"Description:"
                        "\n\n"
                        "This option makes the jailbreak automatically restart the SpringBoard as soon as the jailbreak process is completed without the confirmation."

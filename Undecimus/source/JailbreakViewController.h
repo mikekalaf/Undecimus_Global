@@ -179,5 +179,5 @@ static inline void showAlert(NSString *title, NSString *message, Boolean wait, B
     } else {
         dispatch_sync(dispatch_get_main_queue(), checkOutput);
     }
-    showAlertWithCancel(title, message, wait, destructive, outputIsHidden?nil:@"View Log");
+    showAlertWithCancel(title, message, wait, destructive, outputIsHidden?nil:NSLocalizedString(@"View Log", nil));
 }

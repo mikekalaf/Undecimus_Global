@@ -79,6 +79,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *upTimeLabel;
 @property (weak, nonatomic) IBOutlet UIButton *loadTweaksInfoButton;
 @property (weak, nonatomic) IBOutlet UIButton *loadDaemonsInfoButton;
+//Add option to reset app preference.(by @xapenny2015)
+@property (weak, nonatomic) IBOutlet UIButton *ResetAppPreferences;
 @property (weak, nonatomic) IBOutlet UIButton *dumpAPTicketInfoButton;
 @property (weak, nonatomic) IBOutlet UIButton *refreshIconCacheInfoButton;
 @property (weak, nonatomic) IBOutlet UIButton *disableAutoUpdatesInfoButton;
