@@ -34,10 +34,6 @@ typedef enum {
 } exploit_t;
 
 typedef enum {
-    substrate_substitutor = 0,
-} substitutor_t;
-
-typedef enum {
     jailbreak_capability = 0,
     respring_capability,
     reboot_capability
@@ -65,30 +61,7 @@ typedef struct {
     device_support_info_t device_support_info;
 } exploit_info_t;
 
-typedef enum {
-    lowest_substitutor_stability = 0,
-    low_substitutor_stability,
-    middle_substitutor_stability,
-    high_substitutor_stability,
-    highest_substitutor_stability
-} substitutor_stability;
-
-typedef struct {
-    substitutor_t substitutor;
-    const char *name;
-    const char *package_id;
-    const char *startup_executable;
-    const char *server_executable;
-    const char *run_command;
-    const char *loader_killswitch;
-    const char *bootstrap_tools;
-    substitutor_stability substitutor_stability;
-    device_support_info_t device_support_info;
-    char **resources;
-} substitutor_info_t;
-
 extern exploit_info_t *exploit_infos[];
-extern substitutor_info_t *substitutor_infos[];
 
 enum hashtype {
     HASHTYPE_MD5 = 0,
@@ -159,6 +132,7 @@ NSString *debForPkg(NSString *pkg);
 bool aptUpdate(void);
 bool aptInstall(NSArray <NSString*> *pkgs);
 bool aptUpgrade(void);
+bool supportsExploit(exploit_t exploit);
 bool aptRepair(void);
 bool runApt(NSArray <NSString*> *args);
 bool extractAptPkgList(NSString *path, ArchiveFile* listcache, id_t owner);
@@ -185,14 +159,11 @@ bool multi_path_tcp_enabled(void);
 bool jailbreakEnabled(void);
 NSString *getKernelBuildVersion(void);
 exploit_info_t *get_exploit_info(exploit_t exploit);
-substitutor_info_t *get_substitutor_info(substitutor_t substitutor);
 bool checkDeviceSupport(device_support_info_t device_support);
 bool jailbreakSupported(void);
-bool substitutorSupported(void);
 bool respringSupported(void);
 bool restartSupported(void);
 NSInteger recommendedJailbreakSupport(void);
-NSInteger recommendedSubstitutorSupport(void);
 NSInteger recommendedRestartSupport(void);
 NSInteger recommendedRespringSupport(void);
 bool daemonIsLoaded(char *daemonID);

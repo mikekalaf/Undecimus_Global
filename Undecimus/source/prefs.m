@@ -65,7 +65,6 @@ bool load_prefs(prefs_t *prefs) {
     prefs->hide_log_window = (bool)[[userDefaults objectForKey:@K_HIDE_LOG_WINDOW inDomain:prefsFile] boolValue];
     prefs->auto_respring = (bool)[[userDefaults objectForKey:@K_AUTO_RESPRING inDomain:prefsFile] boolValue];
     prefs->dark_mode = (bool)[[userDefaults objectForKey:@K_DARK_MODE inDomain:prefsFile] boolValue];
-    prefs->code_substitutor = (int)[[userDefaults objectForKey:@K_CODE_SUBSTITUTOR inDomain:prefsFile] intValue];
     return true;
 }
 
@@ -96,7 +95,6 @@ bool set_prefs(prefs_t *prefs) {
     [userDefaults setObject:[NSNumber numberWithBool:(BOOL)prefs->hide_log_window] forKey:@K_HIDE_LOG_WINDOW inDomain:prefsFile];
     [userDefaults setObject:[NSNumber numberWithBool:(BOOL)prefs->auto_respring] forKey:@K_AUTO_RESPRING inDomain:prefsFile];
     [userDefaults setObject:[NSNumber numberWithBool:(BOOL)prefs->dark_mode] forKey:@K_DARK_MODE inDomain:prefsFile];
-    [userDefaults setObject:[NSNumber numberWithInt:(int)prefs->code_substitutor] forKey:@K_CODE_SUBSTITUTOR inDomain:prefsFile];
     [userDefaults synchronize];
     return true;
 }
@@ -107,14 +105,14 @@ void register_default_prefs() {
     defaults[@K_LOAD_DAEMONS] = @YES;
     defaults[@K_DUMP_APTICKET] = @YES;
     defaults[@K_REFRESH_ICON_CACHE] = @NO;
-    defaults[@K_BOOT_NONCE] = NSLocalizedString(@"0x1111111111111111", nil);
+    defaults[@K_BOOT_NONCE] = @"0x1111111111111111";
     defaults[@K_DISABLE_AUTO_UPDATES] = @YES;
     defaults[@K_DISABLE_APP_REVOKES] = @YES;
     defaults[@K_OVERWRITE_BOOT_NONCE] = @YES;
     defaults[@K_EXPORT_KERNEL_TASK_PORT] = @NO;
     defaults[@K_RESTORE_ROOTFS] = @NO;
     defaults[@K_INCREASE_MEMORY_LIMIT] = @NO;
-    defaults[@K_ECID] = NSLocalizedString(@"0x0", nil);
+    defaults[@K_ECID] = @"0x0";
     defaults[@K_INSTALL_CYDIA] = @NO;
     defaults[@K_INSTALL_OPENSSH] = @NO;
     defaults[@K_RELOAD_SYSTEM_DAEMONS] = @YES;
@@ -125,7 +123,6 @@ void register_default_prefs() {
     defaults[@K_AUTO_RESPRING] = @NO;
     defaults[@K_DARK_MODE] = @YES;
     defaults[@K_EXPLOIT] = [NSNumber numberWithInteger:recommendedJailbreakSupport()];
-    defaults[@K_CODE_SUBSTITUTOR] = [NSNumber numberWithInteger:recommendedSubstitutorSupport()];
     [userDefaults registerDefaults:defaults];
 }
 
@@ -136,14 +133,6 @@ void repair_prefs() {
         if (exploit_info != NULL) {
             if (!checkDeviceSupport(exploit_info->device_support_info)) {
                 prefs->exploit = (int)recommendedJailbreakSupport();
-            }
-        }
-    }
-    if (prefs->code_substitutor != -1) {
-        substitutor_info_t *substitutor_info = get_substitutor_info(prefs->code_substitutor);
-        if (substitutor_info != NULL) {
-            if (!checkDeviceSupport(substitutor_info->device_support_info)) {
-                prefs->code_substitutor = (int)recommendedSubstitutorSupport();
             }
         }
     }

@@ -10,22 +10,15 @@
 #import "common.h"
 #import "utils.h"
 
-@interface SettingsTableViewController : UITableViewController  <UITextFieldDelegate, UIPickerViewDataSource, UIPickerViewDelegate>
+@interface SettingsTableViewController : UITableViewController  <UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UISwitch *tweakInjectionSwitch;
 @property (weak, nonatomic) IBOutlet UISwitch *loadDaemonsSwitch;
 @property (weak, nonatomic) IBOutlet UISwitch *dumpAPTicketSwitch;
 @property (weak, nonatomic) IBOutlet UISwitch *refreshIconCacheSwitch;
 @property (weak, nonatomic) IBOutlet UITextField *bootNonceTextField;
-@property (weak, nonatomic) IBOutlet UITextField *kernelExploitTextField;
-@property (nonatomic) UIPickerView *kernelExploitPickerView;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *kernelExploitSegmentedControl;
 @property (nonatomic) NSMutableArray *exploitPickerArray;
 @property (nonatomic) NSMutableDictionary *availableExploits;
-@property (nonatomic) UIToolbar *exploitPickerToolbar;
-@property (weak, nonatomic) IBOutlet UITextField *codeSubstitutorTextField;
-@property (nonatomic) UIPickerView *codeSubstitutorPickerView;
-@property (nonatomic) NSMutableArray *substitutorPickerArray;
-@property (nonatomic) NSMutableDictionary *availableSubstitutors;
-@property (nonatomic) UIToolbar *substitutorPickerToolbar;
 @property (nonatomic) BOOL isPicking;
 @property (weak, nonatomic) IBOutlet UIButton *restartButton;
 @property (weak, nonatomic) IBOutlet UISwitch *disableAutoUpdatesSwitch;
@@ -72,15 +65,12 @@
 @property (weak, nonatomic) IBOutlet UILabel *setCSDebuggedLabel;
 @property (weak, nonatomic) IBOutlet UILabel *autoRespringLabel;
 @property (weak, nonatomic) IBOutlet UILabel *kernelExploitLabel;
-@property (weak, nonatomic) IBOutlet UILabel *codeSubstitutorLabel;
 @property (weak, nonatomic) IBOutlet UIButton *bootNonceButton;
 @property (weak, nonatomic) IBOutlet UIButton *ecidDarkModeButton;
 @property (weak, nonatomic) IBOutlet UILabel *expiryDarkModeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *upTimeLabel;
 @property (weak, nonatomic) IBOutlet UIButton *loadTweaksInfoButton;
 @property (weak, nonatomic) IBOutlet UIButton *loadDaemonsInfoButton;
-//Add option to reset app preference.(by @xapenny2015)
-@property (weak, nonatomic) IBOutlet UIButton *ResetAppPreferences;
 @property (weak, nonatomic) IBOutlet UIButton *dumpAPTicketInfoButton;
 @property (weak, nonatomic) IBOutlet UIButton *refreshIconCacheInfoButton;
 @property (weak, nonatomic) IBOutlet UIButton *disableAutoUpdatesInfoButton;

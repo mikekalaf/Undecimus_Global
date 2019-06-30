@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 48;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -68,8 +68,8 @@
 		51435081229E2F0C00446FBA /* Settings-Light.png in Resources */ = {isa = PBXBuildFile; fileRef = 51435080229E2F0C00446FBA /* Settings-Light.png */; };
 		51F1DB24229ED54400B81A6F /* DarkMode-Dark.png in Resources */ = {isa = PBXBuildFile; fileRef = 51F1DB22229ED54300B81A6F /* DarkMode-Dark.png */; };
 		51F1DB25229ED54400B81A6F /* Settings-Dark.png in Resources */ = {isa = PBXBuildFile; fileRef = 51F1DB23229ED54400B81A6F /* Settings-Dark.png */; };
-		E534ABFE22C738E5004B6FFC /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E534AC0022C738E5004B6FFC /* Localizable.strings */; };
-		E5E1542622C64EE900EE4C4A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E5E1542822C64EEA00EE4C4A /* Main.storyboard */; };
+		E5F57D2022C8AAD700E61D0B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E5F57D2222C8AAD700E61D0B /* Localizable.strings */; };
+		E5F57D2422C8AB4700E61D0B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E5F57D2622C8AB4700E61D0B /* Main.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -204,10 +204,11 @@
 		51F1DB28229F31C400B81A6F /* DarkMode-Light.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "DarkMode-Light.png"; sourceTree = "<group>"; };
 		51F1DB29229F31D300B81A6F /* DarkMode-Light.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "DarkMode-Light.png"; path = "../../../../DarkMode-Light.png"; sourceTree = "<group>"; };
 		51F1DB2A229F325700B81A6F /* multi_path.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = multi_path.entitlements; sourceTree = "<group>"; };
-		E534ABFF22C738E5004B6FFC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
-		E534AC0122C738F8004B6FFC /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
-		E5E1542722C64EEA00EE4C4A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		E5F63FD122C67B7700853356 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
+		E5F57D1F22C8AAD200E61D0B /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+		E5F57D2122C8AAD700E61D0B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		E5F57D2322C8AB1000E61D0B /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		E5F57D2522C8AB4700E61D0B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		E5F57D2822C8AB7500E61D0B /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -472,6 +473,7 @@
 		21C0FC5E21369EB700849420 = {
 			isa = PBXGroup;
 			children = (
+				E5F57D2222C8AAD700E61D0B /* Localizable.strings */,
 				21C0FC6921369EB700849420 /* Undecimus */,
 				21C0FC6821369EB700849420 /* Products */,
 				21675B62214A68B700D20E2B /* Frameworks */,
@@ -494,12 +496,11 @@
 				2170BDCB21B32FF10059BD10 /* source */,
 				2170BD3621B192B90059BD10 /* resources */,
 				2170BD3421B192750059BD10 /* include */,
-				E5E1542822C64EEA00EE4C4A /* Main.storyboard */,
+				E5F57D2622C8AB4700E61D0B /* Main.storyboard */,
 				51F1DB2A229F325700B81A6F /* multi_path.entitlements */,
 				21C0FC7321369EB800849420 /* Assets.xcassets */,
 				21C0FC7521369EB800849420 /* LaunchScreen.storyboard */,
 				21C0FC7821369EB800849420 /* Info.plist */,
-				E534AC0022C738E5004B6FFC /* Localizable.strings */,
 			);
 			path = Undecimus;
 			sourceTree = "<group>";
@@ -580,16 +581,17 @@
 		21C0FC5F21369EB700849420 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 1020;
+				LastUpgradeCheck = 1010;
 				ORGANIZATIONNAME = Pwn20wnd;
 				TargetAttributes = {
 					21C0FC6621369EB700849420 = {
 						CreatedOnToolsVersion = 9.4.1;
+						ProvisioningStyle = Automatic;
 					};
 				};
 			};
 			buildConfigurationList = 21C0FC6221369EB700849420 /* Build configuration list for PBXProject "Undecimus" */;
-			compatibilityVersion = "Xcode 9.3";
+			compatibilityVersion = "Xcode 8.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -615,9 +617,9 @@
 				51F1DB25229ED54400B81A6F /* Settings-Dark.png in Resources */,
 				51435081229E2F0C00446FBA /* Settings-Light.png in Resources */,
 				21C0FC7721369EB800849420 /* LaunchScreen.storyboard in Resources */,
-				E534ABFE22C738E5004B6FFC /* Localizable.strings in Resources */,
+				E5F57D2022C8AAD700E61D0B /* Localizable.strings in Resources */,
 				51F1DB24229ED54400B81A6F /* DarkMode-Dark.png in Resources */,
-				E5E1542622C64EE900EE4C4A /* Main.storyboard in Resources */,
+				E5F57D2422C8AB4700E61D0B /* Main.storyboard in Resources */,
 				21C0FC7421369EB800849420 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -704,24 +706,26 @@
 			isa = PBXVariantGroup;
 			children = (
 				21C0FC7621369EB800849420 /* Base */,
+				E5F57D1F22C8AAD200E61D0B /* zh-Hans */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
-		E534AC0022C738E5004B6FFC /* Localizable.strings */ = {
+		E5F57D2222C8AAD700E61D0B /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				E534ABFF22C738E5004B6FFC /* en */,
-				E534AC0122C738F8004B6FFC /* zh-Hans */,
+				E5F57D2122C8AAD700E61D0B /* en */,
+				E5F57D2322C8AB1000E61D0B /* zh-Hans */,
 			);
 			name = Localizable.strings;
+			path = "../u0_official的副本/Undecimus";
 			sourceTree = "<group>";
 		};
-		E5E1542822C64EEA00EE4C4A /* Main.storyboard */ = {
+		E5F57D2622C8AB4700E61D0B /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				E5E1542722C64EEA00EE4C4A /* Base */,
-				E5F63FD122C67B7700853356 /* zh-Hans */,
+				E5F57D2522C8AB4700E61D0B /* Base */,
+				E5F57D2822C8AB7500E61D0B /* zh-Hans */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -766,11 +770,11 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_TESTABILITY = NO;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_OPTIMIZATION_LEVEL = s;
+				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -783,7 +787,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
 				MTL_ENABLE_DEBUG_INFO = YES;
-				ONLY_ACTIVE_ARCH = NO;
+				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -828,7 +832,7 @@
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
@@ -871,10 +875,7 @@
 				);
 				INFOPLIST_FILE = Undecimus/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Undecimus",
@@ -888,7 +889,7 @@
 					IOKit,
 					"-w",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = science.xapenny.undecimus;
+				PRODUCT_BUNDLE_IDENTIFIER = com.xapenny.undecimus;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -926,10 +927,7 @@
 				);
 				INFOPLIST_FILE = Undecimus/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Undecimus",
@@ -942,7 +940,7 @@
 					IOKit,
 					"-w",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = science.xapenny.undecimus;
+				PRODUCT_BUNDLE_IDENTIFIER = com.xapenny.undecimus;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -960,7 +958,7 @@
 				21C0FC7C21369EB800849420 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Debug;
+			defaultConfigurationName = Release;
 		};
 		21C0FC7D21369EB800849420 /* Build configuration list for PBXNativeTarget "Undecimus" */ = {
 			isa = XCConfigurationList;
@@ -969,7 +967,7 @@
 				21C0FC7F21369EB800849420 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Debug;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

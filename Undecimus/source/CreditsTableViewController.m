@@ -16,8 +16,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(darkModeCreditsView:) name:NSLocalizedString(@"darkModeCredits", nil) object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(lightModeCreditsView:) name:NSLocalizedString(@"lightModeCredits", nil) object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(darkModeCreditsView:) name:@"darkModeCredits" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(lightModeCreditsView:) name:@"lightModeCredits" object:nil];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -102,11 +102,11 @@
 }
 
 -(IBAction)tappedOnIanBeer:(id)sender{
-    [[UIApplication sharedApplication] openURL:[CreditsTableViewController getURLForUserName:NSLocalizedString(@"i41nbeer", nil)] options:@{} completionHandler:nil];
+    [[UIApplication sharedApplication] openURL:[CreditsTableViewController getURLForUserName:@"i41nbeer"] options:@{} completionHandler:nil];
 }
 
 -(IBAction)tappedOnBazad:(id)sender{
-    [[UIApplication sharedApplication] openURL:[CreditsTableViewController getURLForUserName:NSLocalizedString(@"_bazad", nil)] options:@{} completionHandler:nil];
+    [[UIApplication sharedApplication] openURL:[CreditsTableViewController getURLForUserName:@"_bazad"] options:@{} completionHandler:nil];
 }
 
 -(IBAction)tappedOnMorpheus:(id)sender{
@@ -114,43 +114,43 @@
 }
 
 -(IBAction)tappedOnXerub:(id)sender{
-    [[UIApplication sharedApplication] openURL:[CreditsTableViewController getURLForUserName:NSLocalizedString(@"xerub", nil)] options:@{} completionHandler:nil];
+    [[UIApplication sharedApplication] openURL:[CreditsTableViewController getURLForUserName:@"xerub"] options:@{} completionHandler:nil];
 }
 
 -(IBAction)tappedOnPsychoTea:(id)sender{
-    [[UIApplication sharedApplication] openURL:[CreditsTableViewController getURLForUserName:NSLocalizedString(@"ibsparkes", nil)] options:@{} completionHandler:nil];
+    [[UIApplication sharedApplication] openURL:[CreditsTableViewController getURLForUserName:@"ibsparkes"] options:@{} completionHandler:nil];
 }
 
 -(IBAction)tappedOnStek:(id)sender{
-    [[UIApplication sharedApplication] openURL:[CreditsTableViewController getURLForUserName:NSLocalizedString(@"stek29", nil)] options:@{} completionHandler:nil];
+    [[UIApplication sharedApplication] openURL:[CreditsTableViewController getURLForUserName:@"stek29"] options:@{} completionHandler:nil];
 }
 
 -(IBAction)tappedOnNinjaPrawn:(id)sender{
-    [[UIApplication sharedApplication] openURL:[CreditsTableViewController getURLForUserName:NSLocalizedString(@"theninjaprawn", nil)] options:@{} completionHandler:nil];
+    [[UIApplication sharedApplication] openURL:[CreditsTableViewController getURLForUserName:@"theninjaprawn"] options:@{} completionHandler:nil];
 }
 
 -(IBAction)tappedOnCryptic:(id)sender{
-    [[UIApplication sharedApplication] openURL:[CreditsTableViewController getURLForUserName:NSLocalizedString(@"Cryptiiiic", nil)] options:@{} completionHandler:nil];
+    [[UIApplication sharedApplication] openURL:[CreditsTableViewController getURLForUserName:@"Cryptiiiic"] options:@{} completionHandler:nil];
 }
 
 -(IBAction)tappedOnXerusDesign:(id)sender{
-    [[UIApplication sharedApplication] openURL:[CreditsTableViewController getURLForUserName:NSLocalizedString(@"xerusdesign", nil)] options:@{} completionHandler:nil];
+    [[UIApplication sharedApplication] openURL:[CreditsTableViewController getURLForUserName:@"xerusdesign"] options:@{} completionHandler:nil];
 }
 
 -(IBAction)tappedOnAppleDry:(id)sender{
-   [[UIApplication sharedApplication] openURL:[CreditsTableViewController getURLForUserName:NSLocalizedString(@"AppleDry05", nil)] options:@{} completionHandler:nil];
+   [[UIApplication sharedApplication] openURL:[CreditsTableViewController getURLForUserName:@"AppleDry05"] options:@{} completionHandler:nil];
 }
 
 -(IBAction)tappedOnRob:(id)sender{
-    [[UIApplication sharedApplication] openURL:[CreditsTableViewController getURLForUserName:NSLocalizedString(@"AyyItzRob", nil)] options:@{} completionHandler:nil];
+    [[UIApplication sharedApplication] openURL:[CreditsTableViewController getURLForUserName:@"AyyItzRob"] options:@{} completionHandler:nil];
 }
 
 -(IBAction)tappedOnMidnightChip:(id)sender{
-    [[UIApplication sharedApplication] openURL:[CreditsTableViewController getURLForUserName:NSLocalizedString(@"MidnightChip", nil)] options:@{} completionHandler:nil];
+    [[UIApplication sharedApplication] openURL:[CreditsTableViewController getURLForUserName:@"MidnightChip"] options:@{} completionHandler:nil];
 }
 
 -(IBAction)tappedOnGeoSn0w:(id)sender{
-    [[UIApplication sharedApplication] openURL:[CreditsTableViewController getURLForUserName:NSLocalizedString(@"FCE365", nil)] options:@{} completionHandler:nil];
+    [[UIApplication sharedApplication] openURL:[CreditsTableViewController getURLForUserName:@"FCE365"] options:@{} completionHandler:nil];
 }
 
 -(IBAction)tappedOnSwaggo:(id)sender{
@@ -158,47 +158,47 @@
 }
 
 -(IBAction)tappedOnJailbreakbuster:(id)sender{
-    [[UIApplication sharedApplication] openURL:[CreditsTableViewController getURLForUserName:NSLocalizedString(@"jailbreakbuster", nil)] options:@{} completionHandler:nil];
+    [[UIApplication sharedApplication] openURL:[CreditsTableViewController getURLForUserName:@"jailbreakbuster"] options:@{} completionHandler:nil];
 }
 
 -(IBAction)tappedOnJakeashacks:(id)sender{
-    [[UIApplication sharedApplication] openURL:[CreditsTableViewController getURLForUserName:NSLocalizedString(@"Jakeashacks", nil)] options:@{} completionHandler:nil];
+    [[UIApplication sharedApplication] openURL:[CreditsTableViewController getURLForUserName:@"Jakeashacks"] options:@{} completionHandler:nil];
 }
 
 -(IBAction)tappedOnSaurik:(id)sender{
-    [[UIApplication sharedApplication] openURL:[CreditsTableViewController getURLForUserName:NSLocalizedString(@"saurik", nil)] options:@{} completionHandler:nil];
+    [[UIApplication sharedApplication] openURL:[CreditsTableViewController getURLForUserName:@"saurik"] options:@{} completionHandler:nil];
 }
 
 -(IBAction)tappedOnSiguza:(id)sender{
-    [[UIApplication sharedApplication] openURL:[CreditsTableViewController getURLForUserName:NSLocalizedString(@"s1guza", nil)] options:@{} completionHandler:nil];
+    [[UIApplication sharedApplication] openURL:[CreditsTableViewController getURLForUserName:@"s1guza"] options:@{} completionHandler:nil];
 }
 
 -(IBAction)tappedOnExternalist:(id)sender{
-    [[UIApplication sharedApplication] openURL:[CreditsTableViewController getURLForUserName:NSLocalizedString(@"Externalist", nil)] options:@{} completionHandler:nil];
+    [[UIApplication sharedApplication] openURL:[CreditsTableViewController getURLForUserName:@"Externalist"] options:@{} completionHandler:nil];
 }
 
 -(IBAction)tappedOnRealBrightiup:(id)sender{
-    [[UIApplication sharedApplication] openURL:[CreditsTableViewController getURLForUserName:NSLocalizedString(@"realBrightiup", nil)] options:@{} completionHandler:nil];
+    [[UIApplication sharedApplication] openURL:[CreditsTableViewController getURLForUserName:@"realBrightiup"] options:@{} completionHandler:nil];
 }
 
 -(IBAction)tappedOnNitoTV:(id)sender{
-    [[UIApplication sharedApplication] openURL:[CreditsTableViewController getURLForUserName:NSLocalizedString(@"nitoTV", nil)] options:@{} completionHandler:nil];
+    [[UIApplication sharedApplication] openURL:[CreditsTableViewController getURLForUserName:@"nitoTV"] options:@{} completionHandler:nil];
 }
 
 -(IBAction)tappedOnMatchstic:(id)sender{
-    [[UIApplication sharedApplication] openURL:[CreditsTableViewController getURLForUserName:NSLocalizedString(@"_Matchstic", nil)] options:@{} completionHandler:nil];
+    [[UIApplication sharedApplication] openURL:[CreditsTableViewController getURLForUserName:@"_Matchstic"] options:@{} completionHandler:nil];
 }
 
 -(IBAction)tappedOnUmanghere:(id)sender{
-    [[UIApplication sharedApplication] openURL:[CreditsTableViewController getURLForUserName:NSLocalizedString(@"umanghere", nil)] options:@{} completionHandler:nil];
+    [[UIApplication sharedApplication] openURL:[CreditsTableViewController getURLForUserName:@"umanghere"] options:@{} completionHandler:nil];
 }
 
 -(IBAction)tappedOnMiscMisty:(id)sender{
-    [[UIApplication sharedApplication] openURL:[CreditsTableViewController getURLForUserName:NSLocalizedString(@"MiscMisty", nil)] options:@{} completionHandler:nil];
+    [[UIApplication sharedApplication] openURL:[CreditsTableViewController getURLForUserName:@"MiscMisty"] options:@{} completionHandler:nil];
 }
 
 -(IBAction)tappedOnBen:(id)sender{
-    [[UIApplication sharedApplication] openURL:[CreditsTableViewController getURLForUserName:NSLocalizedString(@"benjweaverdev", nil)] options:@{} completionHandler:nil];
+    [[UIApplication sharedApplication] openURL:[CreditsTableViewController getURLForUserName:@"benjweaverdev"] options:@{} completionHandler:nil];
 }
 
 - (IBAction)tappedOnSamG:(id)sender{
@@ -206,7 +206,7 @@
 }
 
 - (IBAction)tappedOnDennis:(id)sender{
-    [[UIApplication sharedApplication] openURL:[CreditsTableViewController getURLForUserName:NSLocalizedString(@"DennisBednarz", nil)] options:@{} completionHandler:nil];
+    [[UIApplication sharedApplication] openURL:[CreditsTableViewController getURLForUserName:@"DennisBednarz"] options:@{} completionHandler:nil];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {

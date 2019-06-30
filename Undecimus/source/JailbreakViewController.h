@@ -29,7 +29,7 @@
     } \
 while (false)
 
-#define notice(msg, wait, destructive) showAlert(NSLocalizedString(@"Notice", nil), msg, wait, destructive)
+#define notice(msg, wait, destructive) showAlert(@"Notice", msg, wait, destructive)
 
 #define status(msg, btnenbld, nvbenbld) do { \
     dispatch_async(dispatch_get_main_queue(), ^{ \

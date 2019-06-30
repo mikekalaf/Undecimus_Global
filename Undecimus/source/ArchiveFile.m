@@ -62,12 +62,12 @@ copy_data(struct archive *ar, struct archive *aw)
 {
     NSString *path = @(archive_entry_pathname(entry));
     _files[path] = [NSMutableDictionary new];
-    _files[path][NSLocalizedString(@"mode", nil)] = @(archive_entry_mode(entry));
-    _files[path][NSLocalizedString(@"uid", nil)] = @(archive_entry_uid(entry));
-    _files[path][NSLocalizedString(@"gid", nil)] = @(archive_entry_gid(entry));
+    _files[path][@"mode"] = @(archive_entry_mode(entry));
+    _files[path][@"uid"] = @(archive_entry_uid(entry));
+    _files[path][@"gid"] = @(archive_entry_gid(entry));
     time_t mtime = archive_entry_mtime(entry);
     if (mtime) {
-        _files[path][NSLocalizedString(@"mtime", nil)] = [NSDate dateWithTimeIntervalSince1970:mtime];
+        _files[path][@"mtime"] = [NSDate dateWithTimeIntervalSince1970:mtime];
     }
 }
 -(void)readContents

@@ -34,7 +34,7 @@ extern int maxStage;
     void (^const block)(void) = ^(void) {
         _assert(bundledResources != nil, localize(@"Bundled Resources version missing."), true);
         if (!jailbreakSupported()) {
-            status(localize(NSLocalizedString(@"Unsupported", nil)), false, true);
+            status(localize(@"Unsupported"), false, true);
             return;
         }
         jailbreak();
@@ -46,17 +46,17 @@ extern int maxStage;
     prefs_t *prefs = copy_prefs();
     
     if (!jailbreakSupported()) {
-        status(localize(NSLocalizedString(@"Unsupported", nil)), false, true);
-        progress(localize(NSLocalizedString(@"Unsupported", nil)));
+        status(localize(@"Unsupported"), false, true);
+        progress(localize(@"Unsupported"));
     } else if (prefs->restore_rootfs) {
-        status(localize(NSLocalizedString(@"Restore RootFS", nil)), true, true);
-        progress(localize(NSLocalizedString(@"Ready to restore RootFS", nil)));
+        status(localize(@"Restore RootFS"), true, true);
+        progress(localize(@"Ready to restore RootFS"));
     } else if (jailbreakEnabled()) {
-        status(localize(NSLocalizedString(@"Re-Jailbreak",nil)), true, true);
-        progress(localize(NSLocalizedString(@"Ready to re-jailbreak", nil)));
+        status(localize(@"Re-Jailbreak"), true, true);
+        progress(localize(@"Ready to re-jailbreak"));
     } else {
-        status(localize(NSLocalizedString(@"Jailbreak", nil)), true, true);
-        progress(localize(NSLocalizedString(@"Ready to jailbreak",nil)));
+        status(localize(@"Jailbreak"), true, true);
+        progress(localize(@"Ready to jailbreak"));
     }
     
     release_prefs(&prefs);
@@ -99,9 +99,9 @@ extern int maxStage;
     [self.settingsNavBar setShadowImage:[UIImage new]];
     [self.creditsNavBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
     [self.creditsNavBar setShadowImage:[UIImage new]];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showSpeicalThanks:) name:NSLocalizedString(@"showSpecialThanks", nil) object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showSpeicalThanks:) name:@"showSpecialThanks" object:nil];
     [self.exploitProgressLabel setText:[NSString stringWithFormat:@"%d/%d", 0, maxStage]];
-    [self.uOVersionLabel setText:[NSString stringWithFormat:NSLocalizedString(@"UI Localization by xapenny | u0 Version: %@", nil), appVersion()]];
+    [self.uOVersionLabel setText:[NSString stringWithFormat:localize(@"UI Localization：xapenny | u0 Version: %@", appVersion())]];
     
     sharedController = self;
     bundledResources = bundledResourcesVersion();
@@ -110,14 +110,14 @@ extern int maxStage;
     LOG("Bundled Resources Version: %@", bundledResources);
     if (bundledResources == nil) {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0ul), ^{
-            showAlert(localize(NSLocalizedString(@"Error", nil)), localize(NSLocalizedString(@"Bundled Resources version is missing. This build is invalid.", nil)), false, false);
+            showAlert(localize(@"Error"), localize(@"Bundled Resources version is missing. This build is invalid."), false, false);
         });
     }
 }
 
 - (void)darkMode {
-    [[NSNotificationCenter defaultCenter] postNotificationName:NSLocalizedString(@"darkModeSettings", nil) object:self];
-    [[NSNotificationCenter defaultCenter] postNotificationName:NSLocalizedString(@"darkModeCredits", nil) object:self];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"darkModeSettings" object:self];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"darkModeCredits" object:self];
     
     [self.darkModeButton setImage:[UIImage imageNamed:@"DarkMode-Dark"] forState:UIControlStateNormal];
     [self.settingsButton setImage:[UIImage imageNamed:@"Settings-Dark"] forState:UIControlStateNormal];
@@ -146,8 +146,8 @@ extern int maxStage;
 }
 
 - (void)lightMode {
-    [[NSNotificationCenter defaultCenter] postNotificationName:NSLocalizedString(@"lightModeSettings", nil) object:self];
-    [[NSNotificationCenter defaultCenter] postNotificationName:NSLocalizedString(@"lightModeCredits", nil) object:self];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"lightModeSettings" object:self];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"lightModeCredits" object:self];
     
     [self.darkModeButton setImage:[UIImage imageNamed:@"DarkMode-Light"] forState:UIControlStateNormal];
     [self.settingsButton setImage:[UIImage imageNamed:@"Settings-Light"] forState:UIControlStateNormal];
@@ -235,23 +235,23 @@ extern int maxStage;
         self.settingsView.alpha = 0;
     } completion:nil];
     
-    [[NSNotificationCenter defaultCenter] postNotificationName:NSLocalizedString(@"dismissKeyboard", nil) object:self];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"dismissKeyboard" object:self];
 
 }
 
 - (IBAction)tappedOnPwn:(id)sender{
-    [[UIApplication sharedApplication] openURL:[CreditsTableViewController getURLForUserName:NSLocalizedString(@"Pwn20wnd", nil)] options:@{} completionHandler:nil];
+    [[UIApplication sharedApplication] openURL:[CreditsTableViewController getURLForUserName:@"Pwn20wnd"] options:@{} completionHandler:nil];
 }
 
 - (IBAction)tappedOnSamB:(id)sender{
-    [[UIApplication sharedApplication] openURL:[CreditsTableViewController getURLForUserName:NSLocalizedString(@"sbingner", nil)] options:@{} completionHandler:nil];
+    [[UIApplication sharedApplication] openURL:[CreditsTableViewController getURLForUserName:@"sbingner"] options:@{} completionHandler:nil];
 }
 
 - (IBAction)tappendOnJoonwoo:(id)sender{
     [[UIApplication sharedApplication] openURL:[CreditsTableViewController getURLForUserName:@"iOS_App_Dev"] options:@{} completionHandler:nil];
 }
 - (IBAction)tappendOnUbik:(id)sender{
-    [[UIApplication sharedApplication] openURL:[CreditsTableViewController getURLForUserName:NSLocalizedString(@"HiMyNameIsUbik", nil)] options:@{} completionHandler:nil];
+    [[UIApplication sharedApplication] openURL:[CreditsTableViewController getURLForUserName:@"HiMyNameIsUbik"] options:@{} completionHandler:nil];
 }
 
 

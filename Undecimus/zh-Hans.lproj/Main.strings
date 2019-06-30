@@ -1,5 +1,5 @@
 /* Class = "UILabel"; text = "Export TFP0"; ObjectID = "0lM-oV-NGn"; */
-"0lM-oV-NGn.text" = "导出 TFP0";
+"0lM-oV-NGn.text" = "导出 TFP0(慎用)";
 
 /* Class = "UIButton"; normalTitle = "Clean Diagnostics Data"; ObjectID = "2He-sb-oZG"; */
 "2He-sb-oZG.normalTitle" = "清除诊断数据";
@@ -70,9 +70,6 @@
 /* Class = "UILabel"; text = "Set CS_DEBUGGED"; ObjectID = "Eq9-Ns-zey"; */
 "Eq9-Ns-zey.text" = "设置 CS_DEBUGGED";
 
-/* Class = "UILabel"; text = "Substitutor"; ObjectID = "Ffi-fg-qBW"; */
-"Ffi-fg-qBW.text" = "Substitutor";
-
 /* Class = "UILabel"; text = "Reload Daemons"; ObjectID = "GIt-S3-wBe"; */
 "GIt-S3-wBe.text" = "重新载入系统进程";
 
@@ -91,9 +88,6 @@
 /* Class = "UITextField"; placeholder = "exploit"; ObjectID = "M40-fy-KdS"; */
 "M40-fy-KdS.placeholder" = "exploit";
 
-/* Class = "UITextField"; text = "substitutor"; ObjectID = "M40-fy-KdS"; */
-"M40-fy-KdS.text" = "substitutor";
-
 /* Class = "UIButton"; normalTitle = "Open Cydia"; ObjectID = "MCD-u6-GW4"; */
 "MCD-u6-GW4.normalTitle" = "打开 Cydia";
 
@@ -101,8 +95,9 @@
 "MKZ-Zb-eq1.normalTitle" = "重新加载 SpringBoard";
 
 /* Class = "UIButton"; normalTitle = "View Source Code"; ObjectID = "MpC-W0-1eR"; */
-"MpC-W0-1eR.normalTitle" = "查看源代码";
-
+"MpC-W0-1eR.normalTitle" = "查看源代码 (Pwn20wnd)";
+//add source view
+"JUP-S3-rEp.normalTitle" = "查看源代码 (xapenny)";
 /* Class = "UILabel"; text = "Restore RootFS"; ObjectID = "Mpp-g3-bNI"; */
 "Mpp-g3-bNI.text" = "恢复 Root文件系统";
 
