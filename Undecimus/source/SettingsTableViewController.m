@@ -50,21 +50,9 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(lightModeSettings:) name:@"lightModeSettings" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dismissKeyboardFromDoneButton:) name:@"dismissKeyboard" object:nil];
     [self.bootNonceTextField setDelegate:self];
-    [self.bootNonceTextField setAutocorrectionType:UITextAutocorrectionTypeNo];
     self.tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(userTappedAnyware:)];
     self.tap.cancelsTouchesInView = NO;
     [self.view addGestureRecognizer:self.tap];
-    self.availableExploits = [NSMutableDictionary new];
-    for (size_t i = 0; exploit_infos[i]; i++) {
-        if (exploit_infos[i]->exploit_capability != jailbreak_capability) {
-            continue;
-        }
-        [_exploitPickerArray addObject:@(exploit_infos[i]->name)];
-        if (!checkDeviceSupport(exploit_infos[i]->device_support_info)) {
-            continue;
-        }
-        [_availableExploits addEntriesFromDictionary:@{@(exploit_infos[i]->name) : @(exploit_infos[i]->exploit)}];
-    }
 }
 
 -(void)dismissKeyboardFromDoneButton:(NSNotification *) notification {
@@ -93,16 +81,19 @@
     [self.setCSDebuggedLabel setTextColor:[UIColor whiteColor]];
     [self.autoRespringLabel setTextColor:[UIColor whiteColor]];
     [self.kernelExploitLabel setTextColor:[UIColor whiteColor]];
+    
     [self.bootNonceButton setTitleColor:[UIColor whiteColor] forState:normal];
     [self.bootNonceTextField setTintColor:[UIColor whiteColor]];
-    [self.bootNonceTextField setTextColor:[UIColor whiteColor]];
+    
     [self.bootNonceTextField setValue:[UIColor darkGrayColor] forKeyPath:@"_placeholderLabel.textColor"];
     [self.ecidLabel setValue:[UIColor darkGrayColor] forKeyPath:@"_placeholderLabel.textColor"];
     [self.ecidDarkModeButton setTitleColor:[UIColor whiteColor] forState:normal];
+    
     [self.expiryDarkModeLabel setTextColor:[UIColor whiteColor]];
     [self.expiryLabel setValue:[UIColor darkGrayColor] forKeyPath:@"_placeholderLabel.textColor"];
     [self.uptimeLabel setValue:[UIColor darkGrayColor] forKeyPath:@"_placeholderLabel.textColor"];
     [self.upTimeLabel setTextColor:[UIColor whiteColor]];
+    
     [JailbreakViewController.sharedController.navigationController.navigationBar setLargeTitleTextAttributes:@{ NSForegroundColorAttributeName : [UIColor whiteColor] }];
 }
 
@@ -127,25 +118,26 @@
     [self.enableGetTaskAllowLabel setTextColor:[UIColor blackColor]];
     [self.setCSDebuggedLabel setTextColor:[UIColor blackColor]];
     [self.autoRespringLabel setTextColor:[UIColor blackColor]];
+    [self.kernelExploitLabel setTextColor:[UIColor blackColor]];
+    
     [self.bootNonceButton setTitleColor:[UIColor blackColor] forState:normal];
     [self.bootNonceTextField setTintColor:[UIColor blackColor]];
-    [self.bootNonceTextField setTextColor:[UIColor blackColor]];
+    
     [self.bootNonceTextField setValue:[UIColor lightGrayColor] forKeyPath:@"_placeholderLabel.textColor"];
     [self.ecidLabel setValue:[UIColor lightGrayColor] forKeyPath:@"_placeholderLabel.textColor"];
     [self.ecidDarkModeButton setTitleColor:[UIColor blackColor] forState:normal];
+    
     [self.expiryDarkModeLabel setTextColor:[UIColor blackColor]];
     [self.expiryLabel setValue:[UIColor lightGrayColor] forKeyPath:@"_placeholderLabel.textColor"];
     [self.uptimeLabel setValue:[UIColor lightGrayColor] forKeyPath:@"_placeholderLabel.textColor"];
     [self.upTimeLabel setTextColor:[UIColor blackColor]];
-    [self.kernelExploitLabel setTextColor:[UIColor blackColor]];
+    
     [JailbreakViewController.sharedController.navigationController.navigationBar setLargeTitleTextAttributes:@{ NSForegroundColorAttributeName : [UIColor blackColor] }];
 }
 
 - (void)userTappedAnyware:(UITapGestureRecognizer *) sender
 {
-    if (!self.isPicking){
-        [self.view endEditing:YES];
-    }
+    [self.view endEditing:YES];
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
@@ -161,9 +153,9 @@
     [self.bootNonceTextField setPlaceholder:@(prefs->boot_nonce)];
     [self.bootNonceTextField setText:nil];
     [self.refreshIconCacheSwitch setOn:(BOOL)prefs->run_uicache];
+    [self.kernelExploitSegmentedControl setSelectedSegmentIndex:(int)prefs->exploit];
     [self.disableAutoUpdatesSwitch setOn:(BOOL)prefs->disable_auto_updates];
     [self.disableAppRevokesSwitch setOn:(BOOL)prefs->disable_app_revokes];
-    [self.kernelExploitSegmentedControl setSelectedSegmentIndex:(int)prefs->exploit];
     [self.kernelExploitSegmentedControl setEnabled:supportsExploit(empty_list_exploit) forSegmentAtIndex:empty_list_exploit];
     [self.kernelExploitSegmentedControl setEnabled:supportsExploit(multi_path_exploit) forSegmentAtIndex:multi_path_exploit];
     [self.kernelExploitSegmentedControl setEnabled:supportsExploit(async_wake_exploit) forSegmentAtIndex:async_wake_exploit];
@@ -201,7 +193,9 @@
     }
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
 }
+
 
 - (IBAction)selectedSpecialThanks:(id)sender {
     
@@ -219,14 +213,6 @@
 - (IBAction)loadDaemonsSwitchValueChanged:(id)sender {
     prefs_t *prefs = copy_prefs();
     prefs->load_daemons = (bool)self.loadDaemonsSwitch.isOn;
-    set_prefs(prefs);
-    release_prefs(&prefs);
-    [self reloadData];
-}
-
-- (IBAction)kernelExploitSegmentedControlValueChanged:(id)sender {
-    prefs_t *prefs = copy_prefs();
-    prefs->exploit = (int)self.kernelExploitSegmentedControl.selectedSegmentIndex;
     set_prefs(prefs);
     release_prefs(&prefs);
     [self reloadData];
@@ -264,10 +250,13 @@
     [self reloadData];
 }
 
-- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
-    return 1;
+- (IBAction)kernelExploitSegmentedControlValueChanged:(id)sender {
+    prefs_t *prefs = copy_prefs();
+    prefs->exploit = (int)self.kernelExploitSegmentedControl.selectedSegmentIndex;
+    set_prefs(prefs);
+    release_prefs(&prefs);
+    [self reloadData];
 }
-
 
 - (IBAction)disableAppRevokesSwitchValueChanged:(id)sender {
     prefs_t *prefs = copy_prefs();
@@ -329,7 +318,7 @@
 }
 
 - (IBAction)tappedOnOpenGithubX:(id)sender {
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://github.com/xapenny/Undecimus_Global"] options:@{} completionHandler:nil];
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://github.com/xapenny/Undecimus_global"] options:@{} completionHandler:nil];
 }
 
 - (IBAction)overwriteBootNonceSwitchValueChanged:(id)sender {
@@ -667,7 +656,7 @@
     showAlert(localize(@"(Re)Install OpenSSH"),
               localize(@"Description:"
                        "\n\n"
-                       "This option makes the jailbreak (re)install the openssh package."
+                       "This option makess the jailbreak (re)install the openssh package."
                        "\n\n"
                        "Compatibility:"
                        "\n\n"

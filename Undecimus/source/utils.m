@@ -31,121 +31,6 @@ int logfd=-1;
 bool injectedToTrustCache = false;
 NSMutableArray *toInjectToTrustCache = nil;
 
-exploit_info_t *exploit_infos[] = {
-    &(exploit_info_t)
-    {
-        .exploit = empty_list_exploit,
-        .name = "Empty List",
-        .exploit_capability = jailbreak_capability,
-        .exploit_reliability = lowest_exploit_reliability,
-        .device_support_info.min_kernel_version = "4397.0.0.2.4~1",
-        .device_support_info.max_kernel_version = "4570.60.19~25",
-        .device_support_info.handler = NULL,
-    },
-    &(exploit_info_t)
-    {
-        .exploit = multi_path_exploit,
-        .name = "Multi Path",
-        .exploit_capability = jailbreak_capability,
-        .exploit_reliability = low_exploit_reliability,
-        .device_support_info.min_kernel_version = "4397.0.0.2.4~1",
-        .device_support_info.max_kernel_version = "4570.52.2~8",
-        .device_support_info.handler = ^bool (void) {
-            if (!multi_path_tcp_enabled())
-                return false;
-            return true;
-        },
-    },
-    &(exploit_info_t)
-    {
-        .exploit = async_wake_exploit,
-        .name = "Async Wake",
-        .exploit_capability = jailbreak_capability,
-        .exploit_reliability = highest_exploit_reliability,
-        .device_support_info.min_kernel_version = "4397.0.0.2.4~1",
-        .device_support_info.max_kernel_version = "4570.20.62~4",
-        .device_support_info.handler = NULL,
-    },
-    &(exploit_info_t)
-    {
-        .exploit = voucher_swap_exploit,
-        .name = "Voucher Swap",
-        .exploit_capability = jailbreak_capability,
-        .exploit_reliability = high_exploit_reliability,
-        .device_support_info.min_kernel_version = "4397.0.0.2.4~1",
-        .device_support_info.max_kernel_version = "4903.240.8~8",
-        .device_support_info.handler = ^bool (void) {
-            if (get_kernel_page_size() != 0x4000)
-                return false;
-            else if (machineNameContains("iPad5,") && kCFCoreFoundationVersionNumber >= kCFCoreFoundationVersionNumber_iOS_12_0)
-                return false;
-            return true;
-        },
-    },
-    &(exploit_info_t)
-    {
-        .exploit = mach_swap_exploit,
-        .name = "Mach Swap",
-        .exploit_capability = jailbreak_capability,
-        .exploit_reliability = middle_exploit_reliability,
-        .device_support_info.min_kernel_version = "4397.0.0.2.4~1",
-        .device_support_info.max_kernel_version = "4903.240.8~8",
-        .device_support_info.handler = ^bool (void) {
-            if (get_kernel_page_size() != 0x1000 &&
-                !machineNameContains("iPad5,") &&
-                !machineNameContains("iPhone8,") &&
-                !machineNameContains("iPad6,"))
-                return false;
-            return true;
-        },
-    },
-    &(exploit_info_t)
-    {
-        .exploit = mach_swap_2_exploit,
-        .name = "Mach Swap 2",
-        .exploit_capability = jailbreak_capability,
-        .exploit_reliability = middle_exploit_reliability,
-        .device_support_info.min_kernel_version = "4397.0.0.2.4~1",
-        .device_support_info.max_kernel_version = "4903.240.8~8",
-        .device_support_info.handler = NULL,
-    },
-    &(exploit_info_t)
-    {
-        .exploit = deja_xnu_exploit,
-        .name = "Deja XNU",
-        .exploit_capability = respring_capability,
-        .exploit_reliability = middle_exploit_reliability,
-        .device_support_info.min_kernel_version = "4397.0.0.2.4~1",
-        .device_support_info.max_kernel_version = "4570.70.24~9",
-        .device_support_info.handler = ^bool (void) {
-            if (jailbreakEnabled())
-                return false;
-            return true;
-        },
-    },
-    &(exploit_info_t)
-    {
-        .exploit = necp_exploit,
-        .name = "Necp",
-        .exploit_capability = reboot_capability,
-        .exploit_reliability = highest_exploit_reliability,
-        .device_support_info.min_kernel_version = "4397.0.0.2.4~1",
-        .device_support_info.max_kernel_version = "4570.70.24~9",
-        .device_support_info.handler = NULL,
-    },
-    &(exploit_info_t)
-    {
-        .exploit = kalloc_crash,
-        .name = "Kalloc Crash",
-        .exploit_capability = reboot_capability,
-        .exploit_reliability = high_exploit_reliability,
-        .device_support_info.min_kernel_version = "4397.0.0.2.4~1",
-        .device_support_info.max_kernel_version = "4903.252.2~2",
-        .device_support_info.handler = NULL,
-    },
-    NULL,
-};
-
 NSData *lastSystemOutput=nil;
 void injectDir(NSString *dir) {
     NSFileManager *fm = [NSFileManager defaultManager];
@@ -437,99 +322,6 @@ bool removePkgs(NSArray <NSString*> *pkgs, bool forceDeps) {
     }
     return runDpkg([@[@"-r"] arrayByAddingObjectsFromArray:pkgs], forceDeps, false);
 }
-
-bool supportsExploit(exploit_t exploit) {
-#ifdef CAN_HAS_UNSUPPORTED_EXPLOIT
-    return true;
-#else /* !CAN_HAS_UNSUPPORTED_EXPLOIT */
-    
-    NSString *minKernelBuildVersion = nil;
-    NSString *maxKernelBuildVersion = nil;
-    
-    switch (exploit) {
-        case multi_path_exploit: {
-            if (!multi_path_tcp_enabled()) {
-                return false;
-            }
-            minKernelBuildVersion = @"4397.0.0.2.4~1";
-            maxKernelBuildVersion = @"4570.52.2~8";
-            break;
-        }
-        case voucher_swap_exploit: {
-            if (get_kernel_page_size() != 0x4000) {
-                return false;
-            }
-            if (machineNameContains("iPad5,") &&
-                kCFCoreFoundationVersionNumber >= kCFCoreFoundationVersionNumber_iOS_12_0) {
-                return false;
-            }
-            minKernelBuildVersion = @"4397.0.0.2.4~1";
-            maxKernelBuildVersion = @"4903.240.8~8";
-            break;
-        }
-        case mach_swap_exploit: {
-            if (get_kernel_page_size() != 0x1000 &&
-                !machineNameContains("iPad5,") &&
-                !machineNameContains("iPhone8,") &&
-                !machineNameContains("iPad6,")) {
-                return false;
-            }
-            minKernelBuildVersion = @"4397.0.0.2.4~1";
-            maxKernelBuildVersion = @"4903.240.8~8";
-            break;
-        }
-        case mach_swap_2_exploit: {
-            minKernelBuildVersion = @"4397.0.0.2.4~1";
-            maxKernelBuildVersion = @"4903.240.8~8";
-            break;
-        }
-        case deja_xnu_exploit: {
-            if (jailbreakEnabled())
-                return false;
-            minKernelBuildVersion = @"4397.0.0.2.4~1";
-            maxKernelBuildVersion = @"4570.70.24~9";
-            break;
-        }
-        case empty_list_exploit: {
-            minKernelBuildVersion = @"4397.0.0.2.4~1";
-            maxKernelBuildVersion = @"4570.60.19~25";
-            break;
-        }
-        case async_wake_exploit: {
-            minKernelBuildVersion = @"4397.0.0.2.4~1";
-            maxKernelBuildVersion = @"4570.20.62~4";
-            break;
-        }
-        case necp_exploit: {
-            minKernelBuildVersion = @"4397.0.0.2.4~1";
-            maxKernelBuildVersion = @"4570.70.24~9";
-            break;
-        }
-        case kalloc_crash: {
-            minKernelBuildVersion = @"4397.0.0.2.4~1";
-            maxKernelBuildVersion = @"4903.252.2~2";
-            break;
-        }
-        default:
-            return false;
-            break;
-    }
-    
-    if (minKernelBuildVersion != nil && maxKernelBuildVersion != nil) {
-        NSString *kernelBuildVersion = getKernelBuildVersion();
-        if (kernelBuildVersion != nil) {
-            if ([kernelBuildVersion compare:minKernelBuildVersion options:NSNumericSearch] != NSOrderedAscending && [kernelBuildVersion compare:maxKernelBuildVersion options:NSNumericSearch] != NSOrderedDescending) {
-                return true;
-            }
-        }
-    } else {
-        return true;
-    }
-    
-    return false;
-#endif /* !CAN_HAS_UNSUPPORTED_EXPLOIT */
-}
-
 
 bool runApt(NSArray <NSString*> *args) {
     if ([args count] < 1) {
@@ -990,26 +782,96 @@ NSString *getKernelBuildVersion() {
     return kernelBuild;
 }
 
-bool checkDeviceSupport(device_support_info_t device_support) {
-#ifdef CAN_HAS_UNSUPPORTED_DEVICE
+bool supportsExploit(exploit_t exploit) {
+#ifdef CAN_HAS_UNSUPPORTED_EXPLOIT
     return true;
-#else /* !CAN_HAS_UNSUPPORTED_DEVICE */
-    if (device_support.min_kernel_version != NULL && device_support.max_kernel_version != NULL) {
+#else /* !CAN_HAS_UNSUPPORTED_EXPLOIT */
+    
+    NSString *minKernelBuildVersion = nil;
+    NSString *maxKernelBuildVersion = nil;
+    
+    switch (exploit) {
+        case multi_path_exploit: {
+            if (!multi_path_tcp_enabled()) {
+                return false;
+            }
+            minKernelBuildVersion = @"4397.0.0.2.4~1";
+            maxKernelBuildVersion = @"4570.52.2~8";
+            break;
+        }
+        case voucher_swap_exploit: {
+            if (get_kernel_page_size() != 0x4000) {
+                return false;
+            }
+            if (machineNameContains("iPad5,") &&
+                kCFCoreFoundationVersionNumber >= kCFCoreFoundationVersionNumber_iOS_12_0) {
+                return false;
+            }
+            minKernelBuildVersion = @"4397.0.0.2.4~1";
+            maxKernelBuildVersion = @"4903.240.8~8";
+            break;
+        }
+        case mach_swap_exploit: {
+            if (get_kernel_page_size() != 0x1000 &&
+                !machineNameContains("iPad5,") &&
+                !machineNameContains("iPhone8,") &&
+                !machineNameContains("iPad6,")) {
+                return false;
+            }
+            minKernelBuildVersion = @"4397.0.0.2.4~1";
+            maxKernelBuildVersion = @"4903.240.8~8";
+            break;
+        }
+        case mach_swap_2_exploit: {
+            minKernelBuildVersion = @"4397.0.0.2.4~1";
+            maxKernelBuildVersion = @"4903.240.8~8";
+            break;
+        }
+        case deja_xnu_exploit: {
+            if (jailbreakEnabled())
+                return false;
+            minKernelBuildVersion = @"4397.0.0.2.4~1";
+            maxKernelBuildVersion = @"4570.70.24~9";
+            break;
+        }
+        case empty_list_exploit: {
+            minKernelBuildVersion = @"4397.0.0.2.4~1";
+            maxKernelBuildVersion = @"4570.60.19~25";
+            break;
+        }
+        case async_wake_exploit: {
+            minKernelBuildVersion = @"4397.0.0.2.4~1";
+            maxKernelBuildVersion = @"4570.20.62~4";
+            break;
+        }
+        case necp_exploit: {
+            minKernelBuildVersion = @"4397.0.0.2.4~1";
+            maxKernelBuildVersion = @"4570.70.24~9";
+            break;
+        }
+        case kalloc_crash: {
+            minKernelBuildVersion = @"4397.0.0.2.4~1";
+            maxKernelBuildVersion = @"4903.252.2~2";
+            break;
+        }
+        default:
+            return false;
+            break;
+    }
+    
+    if (minKernelBuildVersion != nil && maxKernelBuildVersion != nil) {
         NSString *kernelBuildVersion = getKernelBuildVersion();
-        if (kernelBuildVersion == nil) {
-            return false;
+        if (kernelBuildVersion != nil) {
+            if ([kernelBuildVersion compare:minKernelBuildVersion options:NSNumericSearch] != NSOrderedAscending && [kernelBuildVersion compare:maxKernelBuildVersion options:NSNumericSearch] != NSOrderedDescending) {
+                return true;
+            }
         }
-        if ([kernelBuildVersion compare:@(device_support.min_kernel_version) options:NSNumericSearch] == NSOrderedAscending || [kernelBuildVersion compare:@(device_support.max_kernel_version) options:NSNumericSearch] == NSOrderedDescending) {
-            return false;
-        }
+    } else {
+        return true;
     }
-    if (device_support.handler != NULL) {
-        if (!device_support.handler()) {
-            return false;
-        }
-    }
-    return true;
-#endif /* !CAN_HAS_UNSUPPORTED_DEVICE */
+
+    return false;
+#endif /* !CAN_HAS_UNSUPPORTED_EXPLOIT */
 }
 
 bool jailbreakSupported() {
@@ -1489,23 +1351,6 @@ bool cydiaIsInstalled() {
         return false;
     }
     return true;
-}
-
-NSString *localize(NSString *str, ...) {
-    va_list ap;
-    va_start(ap, str);
-    NSString *str_to_localize = [[NSString alloc] initWithFormat:str arguments:ap];
-    va_end(ap);
-    return NSLocalizedString(str_to_localize, @"");
-}
-
-exploit_info_t *get_exploit_info(exploit_t exploit) {
-    for (size_t i = 0; exploit_infos[i]; ++i) {
-        if (exploit_infos[i]->exploit == exploit) {
-            return exploit_infos[i];
-        }
-    }
-    return NULL;
 }
 
 __attribute__((constructor))

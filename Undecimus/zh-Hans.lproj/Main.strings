@@ -114,7 +114,7 @@
 "NHc-vO-PPf.normalTitle" = "Button";
 
 /* Class = "UILabel"; text = "Max Memory Limit"; ObjectID = "PFy-VA-xz7"; */
-"PFy-VA-xz7.text" = "增大内存限制(慎用)";
+"PFy-VA-xz7.text" = "增大内存限制";
 
 /* Class = "UILabel"; text = "Set get-task-allow"; ObjectID = "S6S-NE-WJ9"; */
 "S6S-NE-WJ9.text" = "设置 get-task-allow";
@@ -186,7 +186,7 @@
 "gSs-Qr-0L6.normalTitle" = "@_Matchstic (开发者)";
 
 /* Class = "UILabel"; text = "Dump APTicket"; ObjectID = "gi9-pl-mUW"; */
-"gi9-pl-mUW.text" = "导出 APTicket";
+"gi9-pl-mUW.text" = "转储 APTicket";
 
 /* Class = "UIButton"; normalTitle = "Samg_is_a_Ninja (Development)"; ObjectID = "h4e-3L-EW3"; */
 "h4e-3L-EW3.normalTitle" = "Samg_is_a_Ninja (开发者)";

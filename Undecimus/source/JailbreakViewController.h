@@ -146,7 +146,7 @@ static inline void showAlertWithCancel(NSString *title, NSString *message, Boole
         JailbreakViewController *controller = [JailbreakViewController sharedController];
         [controller dismissViewControllerAnimated:YES completion:nil];
         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
-        UIAlertAction *OK = [UIAlertAction actionWithTitle:NSLocalizedString(@"OK", nil) style:destructive ? UIAlertActionStyleDestructive : UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        UIAlertAction *OK = [UIAlertAction actionWithTitle:localize(@"OK") style:destructive ? UIAlertActionStyleDestructive : UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             controller.canExit = YES;
             if (wait)
                 dispatch_semaphore_signal(semaphore);
@@ -179,5 +179,5 @@ static inline void showAlert(NSString *title, NSString *message, Boolean wait, B
     } else {
         dispatch_sync(dispatch_get_main_queue(), checkOutput);
     }
-    showAlertWithCancel(title, message, wait, destructive, outputIsHidden?nil:NSLocalizedString(@"View Log", nil));
+    showAlertWithCancel(title, message, wait, destructive, outputIsHidden?nil:localize(@"View Log"));
 }

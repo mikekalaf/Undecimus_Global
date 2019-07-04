@@ -101,7 +101,7 @@ extern int maxStage;
     [self.creditsNavBar setShadowImage:[UIImage new]];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showSpeicalThanks:) name:@"showSpecialThanks" object:nil];
     [self.exploitProgressLabel setText:[NSString stringWithFormat:@"%d/%d", 0, maxStage]];
-    [self.uOVersionLabel setText:[NSString stringWithFormat:localize(@"UI Localization：xapenny | u0 Version: %@", appVersion())]];
+    [self.uOVersionLabel setText:[NSString stringWithFormat:@"unc0ver Version: %@", appVersion()]];
     
     sharedController = self;
     bundledResources = bundledResourcesVersion();

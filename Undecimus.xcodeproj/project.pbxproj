@@ -68,8 +68,8 @@
 		51435081229E2F0C00446FBA /* Settings-Light.png in Resources */ = {isa = PBXBuildFile; fileRef = 51435080229E2F0C00446FBA /* Settings-Light.png */; };
 		51F1DB24229ED54400B81A6F /* DarkMode-Dark.png in Resources */ = {isa = PBXBuildFile; fileRef = 51F1DB22229ED54300B81A6F /* DarkMode-Dark.png */; };
 		51F1DB25229ED54400B81A6F /* Settings-Dark.png in Resources */ = {isa = PBXBuildFile; fileRef = 51F1DB23229ED54400B81A6F /* Settings-Dark.png */; };
-		E5F57D2022C8AAD700E61D0B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E5F57D2222C8AAD700E61D0B /* Localizable.strings */; };
-		E5F57D2422C8AB4700E61D0B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E5F57D2622C8AB4700E61D0B /* Main.storyboard */; };
+		E540758822CDBD040096C4D8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E540758A22CDBD040096C4D8 /* Main.storyboard */; };
+		E540758C22CDBD4C0096C4D8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E540758E22CDBD4C0096C4D8 /* Localizable.strings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -204,11 +204,9 @@
 		51F1DB28229F31C400B81A6F /* DarkMode-Light.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "DarkMode-Light.png"; sourceTree = "<group>"; };
 		51F1DB29229F31D300B81A6F /* DarkMode-Light.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "DarkMode-Light.png"; path = "../../../../DarkMode-Light.png"; sourceTree = "<group>"; };
 		51F1DB2A229F325700B81A6F /* multi_path.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = multi_path.entitlements; sourceTree = "<group>"; };
-		E5F57D1F22C8AAD200E61D0B /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
-		E5F57D2122C8AAD700E61D0B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
-		E5F57D2322C8AB1000E61D0B /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
-		E5F57D2522C8AB4700E61D0B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		E5F57D2822C8AB7500E61D0B /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
+		E540758922CDBD040096C4D8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		E540758B22CDBD220096C4D8 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
+		E540758D22CDBD4C0096C4D8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -473,7 +471,7 @@
 		21C0FC5E21369EB700849420 = {
 			isa = PBXGroup;
 			children = (
-				E5F57D2222C8AAD700E61D0B /* Localizable.strings */,
+				E540758E22CDBD4C0096C4D8 /* Localizable.strings */,
 				21C0FC6921369EB700849420 /* Undecimus */,
 				21C0FC6821369EB700849420 /* Products */,
 				21675B62214A68B700D20E2B /* Frameworks */,
@@ -496,7 +494,7 @@
 				2170BDCB21B32FF10059BD10 /* source */,
 				2170BD3621B192B90059BD10 /* resources */,
 				2170BD3421B192750059BD10 /* include */,
-				E5F57D2622C8AB4700E61D0B /* Main.storyboard */,
+				E540758A22CDBD040096C4D8 /* Main.storyboard */,
 				51F1DB2A229F325700B81A6F /* multi_path.entitlements */,
 				21C0FC7321369EB800849420 /* Assets.xcassets */,
 				21C0FC7521369EB800849420 /* LaunchScreen.storyboard */,
@@ -617,9 +615,9 @@
 				51F1DB25229ED54400B81A6F /* Settings-Dark.png in Resources */,
 				51435081229E2F0C00446FBA /* Settings-Light.png in Resources */,
 				21C0FC7721369EB800849420 /* LaunchScreen.storyboard in Resources */,
-				E5F57D2022C8AAD700E61D0B /* Localizable.strings in Resources */,
+				E540758C22CDBD4C0096C4D8 /* Localizable.strings in Resources */,
 				51F1DB24229ED54400B81A6F /* DarkMode-Dark.png in Resources */,
-				E5F57D2422C8AB4700E61D0B /* Main.storyboard in Resources */,
+				E540758822CDBD040096C4D8 /* Main.storyboard in Resources */,
 				21C0FC7421369EB800849420 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -706,28 +704,26 @@
 			isa = PBXVariantGroup;
 			children = (
 				21C0FC7621369EB800849420 /* Base */,
-				E5F57D1F22C8AAD200E61D0B /* zh-Hans */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
-		E5F57D2222C8AAD700E61D0B /* Localizable.strings */ = {
+		E540758A22CDBD040096C4D8 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				E5F57D2122C8AAD700E61D0B /* en */,
-				E5F57D2322C8AB1000E61D0B /* zh-Hans */,
-			);
-			name = Localizable.strings;
-			path = "../u0_official的副本/Undecimus";
-			sourceTree = "<group>";
-		};
-		E5F57D2622C8AB4700E61D0B /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				E5F57D2522C8AB4700E61D0B /* Base */,
-				E5F57D2822C8AB7500E61D0B /* zh-Hans */,
+				E540758922CDBD040096C4D8 /* Base */,
+				E540758B22CDBD220096C4D8 /* zh-Hans */,
 			);
 			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		E540758E22CDBD4C0096C4D8 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E540758D22CDBD4C0096C4D8 /* en */,
+			);
+			name = Localizable.strings;
+			path = Undecimus;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -855,6 +851,7 @@
 				);
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = V37B28NBL5;
@@ -889,7 +886,7 @@
 					IOKit,
 					"-w",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.xapenny.undecimus;
+				PRODUCT_BUNDLE_IDENTIFIER = science.xapenny.undecimus;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -907,6 +904,7 @@
 				);
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = V37B28NBL5;
@@ -940,7 +938,7 @@
 					IOKit,
 					"-w",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.xapenny.undecimus;
+				PRODUCT_BUNDLE_IDENTIFIER = science.xapenny.undecimus;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";

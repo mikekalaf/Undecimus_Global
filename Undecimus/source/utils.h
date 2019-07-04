@@ -10,7 +10,6 @@
 #define _UTILS_H
 #import <sys/types.h>
 #import <sys/stat.h>
-#include <mach/machine.h>
 #import "ArchiveFile.h"
 
 #define system(x) _system(x)
@@ -32,36 +31,6 @@ typedef enum {
     necp_exploit,
     kalloc_crash
 } exploit_t;
-
-typedef enum {
-    jailbreak_capability = 0,
-    respring_capability,
-    reboot_capability
-} exploit_capability_t;
-
-typedef enum {
-    lowest_exploit_reliability = 0,
-    low_exploit_reliability,
-    middle_exploit_reliability,
-    high_exploit_reliability,
-    highest_exploit_reliability
-} exploit_reliability;
-
-typedef struct {
-    const char *min_kernel_version;
-    const char *max_kernel_version;
-    bool (^handler)(void);
-} device_support_info_t;
-
-typedef struct {
-    exploit_t exploit;
-    const char *name;
-    exploit_capability_t exploit_capability;
-    exploit_reliability exploit_reliability;
-    device_support_info_t device_support_info;
-} exploit_info_t;
-
-extern exploit_info_t *exploit_infos[];
 
 enum hashtype {
     HASHTYPE_MD5 = 0,
@@ -132,7 +101,6 @@ NSString *debForPkg(NSString *pkg);
 bool aptUpdate(void);
 bool aptInstall(NSArray <NSString*> *pkgs);
 bool aptUpgrade(void);
-bool supportsExploit(exploit_t exploit);
 bool aptRepair(void);
 bool runApt(NSArray <NSString*> *args);
 bool extractAptPkgList(NSString *path, ArchiveFile* listcache, id_t owner);
@@ -158,8 +126,7 @@ bool machineNameContains(const char *string);
 bool multi_path_tcp_enabled(void);
 bool jailbreakEnabled(void);
 NSString *getKernelBuildVersion(void);
-exploit_info_t *get_exploit_info(exploit_t exploit);
-bool checkDeviceSupport(device_support_info_t device_support);
+bool supportsExploit(exploit_t exploit);
 bool jailbreakSupported(void);
 bool respringSupported(void);
 bool restartSupported(void);
@@ -200,7 +167,6 @@ void waitFor(int seconds);
 bool blockDomainWithName(const char *name);
 bool unblockDomainWithName(const char *name);
 bool cydiaIsInstalled(void);
-NSString *localize(NSString *str, ...);
 
 extern NSData *lastSystemOutput;
 

@@ -128,14 +128,7 @@ void register_default_prefs() {
 
 void repair_prefs() {
     prefs_t *prefs = copy_prefs();
-    if (prefs->exploit != -1) {
-        exploit_info_t *exploit_info = get_exploit_info(prefs->exploit);
-        if (exploit_info != NULL) {
-            if (!checkDeviceSupport(exploit_info->device_support_info)) {
-                prefs->exploit = (int)recommendedJailbreakSupport();
-            }
-        }
-    }
+    if (!supportsExploit(prefs->exploit)) prefs->exploit = (int)recommendedJailbreakSupport();
     set_prefs(prefs);
     release_prefs(&prefs);
 }

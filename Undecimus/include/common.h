@@ -7,7 +7,10 @@
 #include <mach/error.h>
 #ifdef __OBJC__
 #include <Foundation/Foundation.h>
-#define RAWLOG(str, args...) do { NSLog(@str, ##args); } while(false)
+//#define RAWLOG(str, args...) do { NSLog(@str, ##args); } while(false)
+//Add Log localize
+#define RAWLOG(str, args...) do { NSLog(NSLocalizedString(@str, nil), ##args); } while(false)
+#define localize(x) NSLocalizedString(x, @"")
 #define ADDRSTRING(val) [NSString stringWithFormat:@ADDR, val]
 #else
 #include <CoreFoundation/CoreFoundation.h>

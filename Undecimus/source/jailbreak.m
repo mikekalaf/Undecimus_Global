@@ -1654,8 +1654,8 @@ out:;
     myHost = HOST_NULL;
     _assert(mach_port_deallocate(mach_task_self(), myOriginalHost) == KERN_SUCCESS, localize(@"Unable to deallocate my original host port."), true);
     myOriginalHost = HOST_NULL;
-    insertstatus(([NSString stringWithFormat:@"\nRead %zu bytes from kernel memory\nWrote %zu bytes to kernel memory\n", kreads, kwrites]));
-    insertstatus(([NSString stringWithFormat:@"\nJailbroke in %ld seconds\n", time(NULL) - start_time]));
+    insertstatus(([NSString stringWithFormat:localize(@"\nRead %zu bytes from kernel memory\nWrote %zu bytes to kernel memory\n"), kreads, kwrites]));
+    insertstatus(([NSString stringWithFormat:localize(@"\nJailbroke in %ld seconds\n"), time(NULL) - start_time]));
     status(localize(@"Jailbroken"), false, false);
     bool forceRespring = (prefs->exploit == mach_swap_exploit);
     forceRespring |= (prefs->exploit == mach_swap_2_exploit);
@@ -1665,7 +1665,7 @@ out:;
     willRespring |= (prefs->load_tweaks && !prefs->ssh_only);
     release_prefs(&prefs);
     _assert(create_file(success_file, mobile_pw->pw_uid, 644), localize(@"Unable to create success file."), true);
-    showAlert(@"Jailbreak Completed", [NSString stringWithFormat:@"%@\n\n%@\n%@", localize(@"Jailbreak Completed with Status:"), status, localize(willRespring ? @"The device will now respring." : @"The app will now exit.")], true, false);
+    showAlert(localize(@"Jailbreak Completed"), [NSString stringWithFormat:@"%@\n\n%@\n%@", localize(@"Jailbreak Completed with Status:"), status, localize(willRespring ? @"The device will now respring." : @"The app will now exit.")], true, false);
     if (sharedController.canExit) {
         if (forceRespring) {
             WriteKernel64(myCredAddr + koffset(KSTRUCT_OFFSET_UCRED_CR_LABEL), ReadKernel64(kernelCredAddr + koffset(KSTRUCT_OFFSET_UCRED_CR_LABEL)));

@@ -10,16 +10,13 @@
 #import "common.h"
 #import "utils.h"
 
-@interface SettingsTableViewController : UITableViewController  <UITextFieldDelegate>
+@interface SettingsTableViewController : UITableViewController <UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UISwitch *tweakInjectionSwitch;
 @property (weak, nonatomic) IBOutlet UISwitch *loadDaemonsSwitch;
 @property (weak, nonatomic) IBOutlet UISwitch *dumpAPTicketSwitch;
 @property (weak, nonatomic) IBOutlet UISwitch *refreshIconCacheSwitch;
 @property (weak, nonatomic) IBOutlet UITextField *bootNonceTextField;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *kernelExploitSegmentedControl;
-@property (nonatomic) NSMutableArray *exploitPickerArray;
-@property (nonatomic) NSMutableDictionary *availableExploits;
-@property (nonatomic) BOOL isPicking;
 @property (weak, nonatomic) IBOutlet UIButton *restartButton;
 @property (weak, nonatomic) IBOutlet UISwitch *disableAutoUpdatesSwitch;
 @property (weak, nonatomic) IBOutlet UISwitch *disableAppRevokesSwitch;
