@@ -59,7 +59,7 @@ int sha1_to_str(const unsigned char *hash, size_t hashlen, char *buf, size_t buf
     if (buflen < (hashlen*2+1)) {
         return -1;
     }
-    
+
     int i;
     for (i=0; i<hashlen; i++) {
         sprintf(buf+i*2, "%02X", hash[i]);
@@ -75,7 +75,7 @@ NSString *sha1sum(NSString *file)
 
     if (![[NSFileManager defaultManager] fileExistsAtPath:file])
         return nil;
-    
+
     NSInputStream *fileStream = [NSInputStream inputStreamWithFileAtPath:file];
     [fileStream open];
 
@@ -85,9 +85,9 @@ NSString *sha1sum(NSString *file)
         NSInteger read = [fileStream read:buffer maxLength:0x1000];
         CC_SHA1_Update(&c, buffer, (CC_LONG)read);
     }
-    
+
     CC_SHA1_Final(md, &c);
-    
+
     char checksum[CC_SHA1_DIGEST_LENGTH * 2 + 1];
     if (sha1_to_str(md, CC_SHA1_DIGEST_LENGTH, checksum, sizeof(checksum)) != ERR_SUCCESS)
         return nil;
@@ -98,22 +98,22 @@ NSString *md5sum(NSString *file)
 {
     uint8_t buffer[0x1000];
     unsigned char md[CC_SHA1_DIGEST_LENGTH];
-    
+
     if (![[NSFileManager defaultManager] fileExistsAtPath:file])
         return nil;
-    
+
     NSInputStream *fileStream = [NSInputStream inputStreamWithFileAtPath:file];
     [fileStream open];
-    
+
     CC_MD5_CTX c;
     CC_MD5_Init(&c);
     while ([fileStream hasBytesAvailable]) {
         NSInteger read = [fileStream read:buffer maxLength:0x1000];
         CC_MD5_Update(&c, buffer, (CC_LONG)read);
     }
-    
+
     CC_MD5_Final(md, &c);
-    
+
     char checksum[CC_MD5_DIGEST_LENGTH * 2 + 1];
     if (sha1_to_str(md, CC_MD5_DIGEST_LENGTH, checksum, sizeof(checksum)) != ERR_SUCCESS)
         return nil;
@@ -127,11 +127,11 @@ bool verifySha1Sums(NSString *sumFile) {
 bool verifySums(NSString *sumFile, enum hashtype hash) {
     if (![[NSFileManager defaultManager] fileExistsAtPath:sumFile])
         return false;
-    
+
     NSString *checksums = [NSString stringWithContentsOfFile:sumFile encoding:NSUTF8StringEncoding error:NULL];
     if (checksums == nil)
         return false;
-    
+
     for (NSString *checksum in [checksums componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]]) {
         // Ignore blank lines
         if ([checksum isEqualToString:@""])
@@ -216,7 +216,7 @@ bool runDpkg(NSArray <NSString*> *args, bool forceDeps, bool forceAll) {
                         @"--force-configure-any",
                         @"--no-triggers"
                      ]];
-    
+
     if (forceAll) {
         [command addObject:@"--force-all"];
     } else if (forceDeps) {
@@ -335,7 +335,7 @@ bool runApt(NSArray <NSString*> *args) {
                         @"-o", @"APT::Get::List-Cleanup=0"
                         ]];
     [command addObjectsFromArray:args];
-    
+
     const char *argv[command.count];
     for (int i=0; i<[command count]; i++) {
         argv[i] = [command[i] UTF8String];
@@ -391,7 +391,7 @@ bool removeURLFromSources(NSMutableString *sources, NSString *url)
                                       regularExpressionWithPattern:pattern
                                       options:NSRegularExpressionDotMatchesLineSeparators
                                       error:nil];
-    
+
     for (NSTextCheckingResult *source in [sourceexp matchesInString:sources options:0 range:NSMakeRange(0, sources.length)])
     {
         removed = true;
@@ -409,7 +409,7 @@ void deduplicateSillySources(void)
         if (pkgIsInstalled("org.coolstar.sileo")) {
             NSString *orig_sileo_sources = [sileo_sources copy];
             NSRegularExpression *urlexp = [NSRegularExpression regularExpressionWithPattern:@"https?://(\\S+[^/\\s]|\\S+)/?\\s" options:0 error:nil];
-            
+
             for (NSTextCheckingResult *match in [urlexp matchesInString:cydia_list options:0 range:NSMakeRange(0, cydia_list.length)])
             {
                 NSString *url = [cydia_list substringWithRange:[match rangeAtIndex:1]];
@@ -456,7 +456,7 @@ bool is_mountpoint(const char *filename) {
 
     if (!S_ISDIR(buf.st_mode))
         return false;
-    
+
     char *cwd = getcwd(NULL, 0);
     int rv = chdir(filename);
     assert(rv == ERR_SUCCESS);
@@ -572,7 +572,7 @@ int runCommandv(const char *cmd, int argc, const char * const* argv, void (^unre
     bool valid_pipe = false;
     posix_spawnattr_t *attr = NULL;
     posix_spawnattr_t attrStruct;
-    
+
     NSMutableString *cmdstr = [NSMutableString stringWithCString:cmd encoding:NSUTF8StringEncoding];
     for (int i=1; i<argc; i++) {
         [cmdstr appendFormat:@" \"%s\"", argv[i]];
@@ -586,24 +586,24 @@ int runCommandv(const char *cmd, int argc, const char * const* argv, void (^unre
         posix_spawn_file_actions_addclose(actions, out_pipe[0]);
         posix_spawn_file_actions_addclose(actions, out_pipe[1]);
     }
-    
+
     if (unrestrict && posix_spawnattr_init(&attrStruct) == ERR_SUCCESS) {
         attr = &attrStruct;
         posix_spawnattr_setflags(attr, POSIX_SPAWN_START_SUSPENDED);
     }
-    
+
     int rv = posix_spawn(&pid, cmd, actions, attr, (char *const *)argv, environ);
     LOG("%s(%d) command: %@", __FUNCTION__, pid, cmdstr);
-    
+
     if (unrestrict) {
         unrestrict(pid);
         kill(pid, SIGCONT);
     }
-    
+
     if (valid_pipe) {
         close(out_pipe[1]);
     }
-    
+
     if (rv == ERR_SUCCESS) {
         if (valid_pipe) {
             NSMutableData *outData = [NSMutableData new];
@@ -630,7 +630,7 @@ int runCommandv(const char *cmd, int argc, const char * const* argv, void (^unre
         } else {
             LOG("%s(%d) completed with exit status %d", __FUNCTION__, pid, WEXITSTATUS(rv));
         }
-        
+
     } else {
         LOG("%s(%d): ERROR posix_spawn failed (%d): %s", __FUNCTION__, pid, rv, strerror(rv));
         rv <<= 8; // Put error into WEXITSTATUS
@@ -652,7 +652,7 @@ int runCommand(const char *cmd, ...) {
         argc++;
     }
     va_end(ap);
-    
+
     const char *argv[argc+1];
     argv[0] = cmd;
     for (int i=1; i<argc; i++) {
@@ -671,7 +671,7 @@ NSString *pathForResource(NSString *resource) {
     dispatch_once(&onceToken, ^{
         sourcePath = [[NSBundle mainBundle] bundlePath];
     });
-    
+
     NSString *path = [[sourcePath stringByAppendingPathComponent:resource] stringByStandardizingPath];
     if (![[NSFileManager defaultManager] fileExistsAtPath:path]) {
         return nil;
@@ -786,10 +786,10 @@ bool supportsExploit(exploit_t exploit) {
 #ifdef CAN_HAS_UNSUPPORTED_EXPLOIT
     return true;
 #else /* !CAN_HAS_UNSUPPORTED_EXPLOIT */
-    
+
     NSString *minKernelBuildVersion = nil;
     NSString *maxKernelBuildVersion = nil;
-    
+
     switch (exploit) {
         case multi_path_exploit: {
             if (!multi_path_tcp_enabled()) {
@@ -858,7 +858,7 @@ bool supportsExploit(exploit_t exploit) {
             return false;
             break;
     }
-    
+
     if (minKernelBuildVersion != nil && maxKernelBuildVersion != nil) {
         NSString *kernelBuildVersion = getKernelBuildVersion();
         if (kernelBuildVersion != nil) {
@@ -884,7 +884,8 @@ bool jailbreakSupported() {
 }
 
 bool respringSupported() {
-    return supportsExploit(deja_xnu_exploit);
+    return supportsExploit(deja_xnu_exploit) ||
+    supportsExploit(voucher_swap_exploit);
 }
 
 bool restartSupported() {
@@ -924,6 +925,8 @@ NSInteger recommendedRestartSupport() {
 NSInteger recommendedRespringSupport() {
     if (supportsExploit(deja_xnu_exploit))
         return deja_xnu_exploit;
+    else if (supportsExploit(voucher_swap_exploit))
+        return voucher_swap_exploit;
     else
         return -1;
 }
